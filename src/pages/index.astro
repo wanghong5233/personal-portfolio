@@ -19,68 +19,74 @@ const featured = allProjects
   title=""
   description={`${site.headline}。${site.status}`}
 >
-  <section class="mb-12">
-    <p class="text-sm mb-2" style="color: var(--color-muted);">
-      {site.title}
-    </p>
-    <h1 class="text-3xl md:text-4xl font-bold leading-tight mb-3">
-      {homeEntry.data.headline}
-    </h1>
-    <p class="text-base md:text-lg mb-4" style="color: var(--color-muted);">
-      {homeEntry.data.intro}
-    </p>
-    <p
-      class="inline-block text-sm rounded-md px-3 py-1.5 mb-5"
-      style="border: 1px solid var(--color-border); background: var(--color-card);"
-    >
-      {site.status}
-    </p>
-    <div class="flex flex-wrap gap-3 mb-5">
-      <a
-        href="/resume"
-        class="no-underline rounded-md px-4 py-2 text-sm font-medium"
-        style="background: var(--color-accent); color: var(--color-accent-fg);"
-      >
-        查看在线简历
-      </a>
-      <a
-        href="/projects"
-        class="no-underline rounded-md px-4 py-2 text-sm font-medium"
-        style="border: 1px solid var(--color-border); color: var(--color-fg);"
-      >
-        查看作品集
-      </a>
-      <a
-        href="/contact"
-        class="no-underline rounded-md px-4 py-2 text-sm font-medium"
-        style="border: 1px solid var(--color-border); color: var(--color-fg);"
-      >
-        联系我
-      </a>
+  <section class="surface-panel mb-14 rounded-[2rem] p-6 md:p-10">
+    <div class="grid gap-8 md:grid-cols-[1.7fr_1fr] md:items-end">
+      <div>
+        <p class="eyebrow mb-3">
+          {site.title}
+        </p>
+        <h1 class="text-4xl md:text-6xl font-bold leading-[1.05] mb-5 tracking-tight">
+          {homeEntry.data.headline}
+        </h1>
+        <p class="text-base md:text-lg mb-5 max-w-2xl leading-8" style="color: var(--color-muted);">
+          {homeEntry.data.intro}
+        </p>
+        <p class="status-pill mb-7">
+          {site.status}
+        </p>
+        <div class="flex flex-wrap gap-3 mb-6">
+          <a href="/resume" class="button-primary">
+            查看在线简历
+          </a>
+          <a href="/projects" class="button-secondary">
+            查看作品集
+          </a>
+          <a href="/contact" class="button-secondary">
+            联系我
+          </a>
+        </div>
+        {
+          homeEntry.data.techTags.length > 0 && (
+            <ul class="flex flex-wrap gap-1.5 list-none p-0">
+              {homeEntry.data.techTags.map((t) => (
+                <li class="tag">
+                  {t}
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </div>
+
+      <aside class="quiet-card rounded-3xl p-5">
+        <p class="text-sm font-semibold mb-4" style="color: var(--color-fg);">
+          给访问者的 30 秒速读
+        </p>
+        <dl class="grid gap-4 text-sm">
+          <div>
+            <dt class="mb-1" style="color: var(--color-subtle);">当前阶段</dt>
+            <dd class="font-medium" style="color: var(--color-fg);">2027 届研究生求职期</dd>
+          </div>
+          <div>
+            <dt class="mb-1" style="color: var(--color-subtle);">重点方向</dt>
+            <dd class="font-medium" style="color: var(--color-fg);">AI 应用 / 全栈 / Agent 工程</dd>
+          </div>
+          <div>
+            <dt class="mb-1" style="color: var(--color-subtle);">证据入口</dt>
+            <dd class="font-medium" style="color: var(--color-fg);">Demo、GitHub、架构图与复盘</dd>
+          </div>
+        </dl>
+      </aside>
     </div>
-    {
-      homeEntry.data.techTags.length > 0 && (
-        <ul class="flex flex-wrap gap-1.5 list-none p-0">
-          {homeEntry.data.techTags.map((t) => (
-            <li
-              class="text-xs px-2 py-0.5 rounded"
-              style="border: 1px solid var(--color-border); color: var(--color-muted);"
-            >
-              {t}
-            </li>
-          ))}
-        </ul>
-      )
-    }
   </section>
 
-  <section class="mb-12 prose prose-neutral dark:prose-invert max-w-none">
+  <section class="mb-12 prose prose-neutral max-w-none">
     <HomeContent />
   </section>
 
   <section class="mb-4">
     <div class="flex items-baseline justify-between mb-4">
-      <h2 class="text-xl font-semibold">代表项目</h2>
+      <h2 class="text-2xl font-semibold tracking-tight">代表项目</h2>
       <a href="/projects" class="text-sm">全部 →</a>
     </div>
     <div class="grid gap-4">

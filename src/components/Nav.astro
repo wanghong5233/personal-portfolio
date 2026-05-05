@@ -6,10 +6,14 @@ const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
 
 <header
   class="no-print sticky top-0 z-30 backdrop-blur border-b"
-  style="background: color-mix(in oklab, var(--color-bg) 92%, transparent); border-color: var(--color-border);"
+  style="background: color-mix(in oklab, var(--color-surface) 88%, transparent); border-color: var(--color-border);"
 >
-  <div class="mx-auto max-w-3xl px-5 py-3 flex items-center gap-4">
-    <a href="/" class="font-semibold no-underline" style="color: var(--color-fg);">
+  <div class="mx-auto max-w-5xl px-5 py-3.5 md:px-8 flex items-center gap-4">
+    <a
+      href="/"
+      class="rounded-full px-2.5 py-1 text-sm font-semibold no-underline"
+      style="border: 1px solid var(--color-border); background: var(--color-surface); color: var(--color-fg);"
+    >
       {site.name}
     </a>
     <nav class="ml-auto flex flex-wrap gap-x-4 gap-y-1 text-sm">
@@ -22,8 +26,7 @@ const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
           return (
             <a
               href={item.href}
-              class="no-underline transition-opacity"
-              style={`color: ${isActive ? 'var(--color-fg)' : 'var(--color-muted)'}; ${isActive ? 'font-weight: 600;' : ''}`}
+              class={`nav-link ${isActive ? 'nav-link-active font-semibold' : ''}`}
             >
               {item.label}
             </a>

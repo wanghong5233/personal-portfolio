@@ -12,7 +12,7 @@ const updatedLabel = entry.data.updatedAt.toISOString().slice(0, 10);
 ---
 
 <BaseLayout title="在线简历" description={`${site.name} 的最新在线简历。最后更新：${updatedLabel}。`}>
-  <article class="resume-page prose prose-neutral dark:prose-invert max-w-none">
+  <article class="resume-page prose prose-neutral max-w-none">
     <header class="not-prose mb-6 pb-4 border-b" style="border-color: var(--color-border);">
       <h1 class="text-3xl font-bold mb-1">{site.fullName} · {site.title}</h1>
       <p class="text-sm" style="color: var(--color-muted);">{site.headline}</p>

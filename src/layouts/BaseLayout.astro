@@ -47,7 +47,7 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? site.domain).toSt
   </head>
   <body class={`min-h-dvh flex flex-col ${bodyClass}`.trim()}>
     <Nav />
-    <main class="flex-1 mx-auto w-full max-w-3xl px-5 py-10 md:py-14">
+    <main class="flex-1 mx-auto w-full max-w-5xl px-5 py-10 md:px-8 md:py-16">
       <slot />
     </main>
     <Footer />
