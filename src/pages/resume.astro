@@ -59,13 +59,14 @@ const updatedLabel = entry.data.updatedAt.toISOString().slice(0, 10);
               下载附件简历
             </a>
           ) : (
-            <span
-              class="rounded px-3 py-1.5 inline-flex items-center"
-              style="border: 1px dashed var(--color-border); color: var(--color-muted); cursor: default;"
-              title="将 PDF 置于 public/files/resume.pdf 并重新部署后即可下载"
+            <button
+              type="button"
+              id="download-resume-missing"
+              class="rounded px-3 py-1.5"
+              style="border: 1px solid var(--color-border); background: var(--color-card); color: var(--color-fg);"
             >
-              附件简历暂未上传
-            </span>
+              下载附件简历
+            </button>
           )
         }
       </div>
@@ -86,7 +87,8 @@ const updatedLabel = entry.data.updatedAt.toISOString().slice(0, 10);
 <script is:inline>
   document.addEventListener('click', (e) => {
     const target = e.target;
-    if (target instanceof HTMLElement && target.id === 'copy-resume-link') {
+    if (!(target instanceof HTMLElement)) return;
+    if (target.id === 'copy-resume-link') {
       const url = window.location.href.split('#')[0];
       navigator.clipboard.writeText(url).then(() => {
         const original = target.textContent;
@@ -95,6 +97,10 @@ const updatedLabel = entry.data.updatedAt.toISOString().slice(0, 10);
           target.textContent = original;
         }, 1500);
       });
+      return;
+    }
+    if (target.id === 'download-resume-missing') {
+      window.alert('附件简历暂未上传。可改用本页「打印为 PDF」导出。');
     }
   });
 </script>
