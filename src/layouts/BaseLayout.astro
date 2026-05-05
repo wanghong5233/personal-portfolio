@@ -42,6 +42,13 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? site.domain).toSt
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
+    <link
+      rel="preload"
+      href="/fonts/zcool-kuaile-400.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate" type="application/rss+xml" title={site.name} href="/rss.xml" />
   </head>

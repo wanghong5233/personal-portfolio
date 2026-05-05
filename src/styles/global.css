@@ -28,7 +28,7 @@
   font-family: "ZCOOL KuaiLe";
   font-style: normal;
   font-weight: 400;
-  font-display: swap;
+  font-display: block;
   src: url("/fonts/zcool-kuaile-400.ttf") format("truetype");
 }
 
