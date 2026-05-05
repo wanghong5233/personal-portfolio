@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import contact from '../data/contact.json';
 ---
 
-<BaseLayout title="联系方式" description="邮箱、GitHub、飞书、微信二维码与可联系时间。">
+<BaseLayout title="联系方式" description="邮箱、GitHub 与可联系状态。">
   <header class="mb-6">
     <h1 class="text-3xl font-bold mb-2">联系方式</h1>
     <p class="text-sm" style="color: var(--color-muted);">
@@ -19,7 +19,7 @@ import contact from '../data/contact.json';
     >
       <p class="text-xs mb-1" style="color: var(--color-muted);">邮箱（推荐）</p>
       <div class="flex flex-wrap items-center gap-2">
-        <a href={`mailto:${contact.email}?subject=${encodeURIComponent(contact.emailSubjectSuggestion ?? '')}`} class="font-mono">
+        <a href={`mailto:${contact.email}`} class="font-mono">
           {contact.email}
         </a>
         <button
@@ -31,11 +31,6 @@ import contact from '../data/contact.json';
           复制邮箱
         </button>
       </div>
-      {contact.emailSubjectSuggestion && (
-        <p class="text-xs mt-2" style="color: var(--color-muted);">
-          建议主题：{contact.emailSubjectSuggestion}
-        </p>
-      )}
     </div>
 
     <div
@@ -92,9 +87,6 @@ import contact from '../data/contact.json';
     )}
   </section>
 
-  <p class="text-xs" style="color: var(--color-muted);">
-    隐私边界：本页不展示真实手机号和微信号明文；如需微信沟通，可先通过邮箱联系。
-  </p>
 </BaseLayout>
 
 <script is:inline>

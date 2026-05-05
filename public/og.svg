@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Wang Hong - Personal Portfolio</title>
+  <desc id="desc">Agent systems engineering, multi-agent workflows, and AI application engineering.</desc>
+  <rect width="1200" height="630" fill="#f7f4ef"/>
+  <circle cx="170" cy="110" r="260" fill="#e8efff"/>
+  <circle cx="1080" cy="70" r="220" fill="#f1e4cc"/>
+  <rect x="88" y="82" width="1024" height="466" rx="36" fill="#fffdf8" stroke="#e3ded4" stroke-width="2"/>
+  <text x="140" y="185" fill="#2557d6" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="28" font-weight="700" letter-spacing="2">WH5233.ME</text>
+  <text x="140" y="285" fill="#172033" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="64" font-weight="760">Wang Hong</text>
+  <text x="140" y="355" fill="#526173" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="34">AI Master's Student / Soochow University / 2027</text>
+  <text x="140" y="430" fill="#172033" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="38">Agent Systems - Multi-Agent - AI Applications</text>
+  <line x1="140" y1="485" x2="1060" y2="485" stroke="#e3ded4" stroke-width="2"/>
+  <text x="140" y="528" fill="#7d8794" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="24">Personal Portfolio Site</text>
+</svg>

@@ -22,9 +22,9 @@ interface Props {
 const { href, title, summary, role, status, tags, evidence = {} } = Astro.props;
 
 const statusLabel: Record<Status, string> = {
-  live: '已上线',
-  demo: 'Demo 可用',
-  wip: '开发中',
+  live: '已部署',
+  demo: 'MVP 开放',
+  wip: '持续迭代',
   archived: '归档',
 };
 ---

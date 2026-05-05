@@ -1,6 +1,7 @@
 # Personal Portfolio Site
 
 > 个人长期职业门户站。需求与设计依据见 [`docs/PRD.md`](./docs/PRD.md)。
+> 线上地址：<https://wh5233.me>
 
 ## 技术栈
 
@@ -82,14 +83,13 @@ npm run preview  # 预览 dist/ 静态产物
 - [ ] `npm run build` 通过，`dist/` 目录生成。
 - [ ] `dist/index.html`、`dist/resume/index.html`、`dist/projects/scholarmind/index.html` 存在。
 - [ ] `src/data/site.json` 中的 `name`、`fullName`、`domain`、`updatedAt` 已填真实值。
-- [ ] `src/data/contact.json` 中的 `email`、`github`、`feishu` 已填真实值。
-- [ ] `public/images/contact/wechat-qr.webp` 已上传，否则 `/contact` 微信二维码会显示破图。
+- [ ] `src/data/contact.json` 中的 `email`、`github` 已填真实值；飞书、微信二维码准备好后再接入。
 
 ## 内容提交前检查
 
 - 新增项目必须包含 `summary`、`role`、`status`、`tags`、`stack`、`updatedAt`。
-- 项目详情至少有一种可验证证据：Demo、截图、视频、GitHub、架构图或文章。
-- 外链应能访问；无法访问时把 `status` 改为 `broken` 或暂时隐藏。
+- 项目详情至少有一种可验证证据：访问入口、截图、视频、GitHub、架构图或文章。
+- 外链应能访问；无法访问时先移除对应链接或暂时隐藏项目。
 - 简历更新后请同步检查 `/resume` 打印样式（浏览器打印预览）。
 - 提交前运行：`npm run check && npm run build`。
 
@@ -102,4 +102,3 @@ npm run preview  # 预览 dist/ 静态产物
 ## 文档
 
 - [`docs/PRD.md`](./docs/PRD.md)：长期事实源，包含定位、范围、页面、内容模型、验收标准。
-- `docs/internal/`：内部部署笔记目录，已在 `.gitignore` 中，仅本地保留。
