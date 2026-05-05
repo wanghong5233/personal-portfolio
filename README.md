@@ -29,6 +29,8 @@ npm run dev
 
 默认访问 `http://localhost:4321/`。
 
+若出现 `The requested module 'node:util' does not provide an export named 'styleText'`，说明当前 Shell 里用的 **Node 版本过低**（常见于 Conda `base` 自带的旧 Node）。请在**项目目录**执行 `node -v`，需 **≥ 20.18**（与 `package.json` 中 `engines` 一致）；升级到 20.18+ 或 22 后再执行 `npm run dev`。
+
 常用脚本：
 
 ```bash
