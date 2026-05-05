@@ -1,0 +1,68 @@
+---
+title: Pulse
+summary: 个人 Agent Runtime 实验项目，覆盖长期任务调度、恢复、安全门控和求职自动化。
+role: 独立开发者 / Agent 全栈工程师（端到端交付）
+status: wip
+featured: true
+tags:
+  - Agent
+  - ReAct
+  - Automation
+  - Fullstack
+stack:
+  - Python
+  - FastAPI
+  - PostgreSQL
+  - asyncio
+  - Patchright
+  - LLM
+evidence:
+  github: https://github.com/wanghong5233/Pulse
+cover: /images/projects/pulse-cover.webp
+startedAt: 2026-03-01
+updatedAt: 2026-05-05
+---
+
+## 问题背景
+
+Pulse 是一个个人 Agent Runtime 实验项目。它关注的问题不是“让模型多调用几个工具”，而是长期任务如何调度、恢复、审计，以及如何在真实场景里控制风险。
+
+## 我的职责
+
+- 负责整体架构和核心功能实现，覆盖 Agent Runtime、业务模块、浏览器执行层和多渠道接入。
+- 设计三层分离的 Agent Runtime：Agent OS / Task Runtime / Memory Runtime。
+- 实现求职自动化、HR 对话、技术雷达、飞书与微信双渠道交互。
+- 构建 EventBus、SSE、监控面板、审计日志和告警链路。
+
+## 技术架构
+
+- Agent OS 层：Heartbeat 守护循环、通用任务抽象、模块自注册、工作时段感知、四级恢复梯度与人工接管。
+- Task Runtime 层：全链路追踪 ID、五类执行模式上下文隔离、Prompt 模板体系、Hook 生命周期、安全门控、Checkpoint / Resume。
+- Memory Runtime 层：Layer × Scope 双轴记忆模型、四级压缩流水线、事实晋升、治理审计与冲突替代。
+- 业务模块：多平台求职自动化、HR 对话、技术雷达，以 Modular Monolith + Capability Layer 组织。
+- 执行层：Patchright 反检测浏览器执行，结合确定性 DOM 操作与 LLM 语义决策。
+
+## 核心难点
+
+- 长期托管：心跳不是简单定时器，而是完整 Agent Turn，需要支持恢复、熔断、人工接管和工作时段感知。
+- 安全边界：求职对话、简历发送和平台操作都有误触风险，需要来源匹配、敏感话题白名单、置信度兜底和幂等性检查。
+- 记忆治理：不同执行模式需要隔离上下文和记忆权限，避免长期记忆污染或错误事实持续扩散。
+- 反检测自动化：多招聘平台页面结构和风控策略差异明显，需要在执行确定性与决策灵活性之间做平衡。
+
+## Demo 与证据
+
+- GitHub：https://github.com/wanghong5233/Pulse
+- 运行截图 / 架构图 / 技术复盘：待补充
+
+## 结果与复盘
+
+- 系统在个人真实求职中持续运行，支持对话指令触发与定时托管。
+- 求职模块覆盖 BOSS 直聘、猎聘、智联招聘、实习僧等平台，单平台日均自动触达 50+ 位 HR。
+- 技术雷达模块可每日自动采集多源信息，经 LLM 相关度评分、摘要和去重后推送飞书简报。
+- 后续重点是补充公开演示材料、架构图和复盘文档。
+
+## 设计取舍与后续计划
+
+- 采用 Modular Monolith，而不是过早拆成微服务，优先降低个人长期维护成本。
+- 求职自动化使用“确定性 DOM 操作 + LLM 语义决策”的混合方案，而不是纯视觉 Agent，优先保证执行稳定性。
+- 记忆系统采用 Layer × Scope 双轴隔离，牺牲部分实现复杂度，换取长期任务中的状态可控性。

@@ -66,32 +66,34 @@ import contact from '../data/contact.json';
       </div>
     )}
 
-    <div
-      class="rounded-lg border p-4"
-      style="border-color: var(--color-border); background: var(--color-card);"
-    >
-      <p class="text-xs mb-2" style="color: var(--color-muted);">微信</p>
-      <p class="text-sm mb-3" style="color: var(--color-muted);">
-        微信号不公开展示。请通过下方二维码添加，备注来源以便确认。
-      </p>
-      <details>
-        <summary class="text-sm cursor-pointer">展开二维码</summary>
-        <div class="mt-3">
-          <img
-            src={contact.wechatQr}
-            alt="微信二维码"
-            width="200"
-            height="200"
-            loading="lazy"
-            style="border: 1px solid var(--color-border); border-radius: 6px;"
-          />
-        </div>
-      </details>
-    </div>
+    {contact.wechatQr && (
+      <div
+        class="rounded-lg border p-4"
+        style="border-color: var(--color-border); background: var(--color-card);"
+      >
+        <p class="text-xs mb-2" style="color: var(--color-muted);">微信</p>
+        <p class="text-sm mb-3" style="color: var(--color-muted);">
+          微信号不公开展示。请通过下方二维码添加，备注来源以便确认。
+        </p>
+        <details>
+          <summary class="text-sm cursor-pointer">展开二维码</summary>
+          <div class="mt-3">
+            <img
+              src={contact.wechatQr}
+              alt="微信二维码"
+              width="200"
+              height="200"
+              loading="lazy"
+              style="border: 1px solid var(--color-border); border-radius: 6px;"
+            />
+          </div>
+        </details>
+      </div>
+    )}
   </section>
 
   <p class="text-xs" style="color: var(--color-muted);">
-    隐私边界：本页不展示真实手机号；微信号通过二维码提供。
+    隐私边界：本页不展示真实手机号和微信号明文；如需微信沟通，可先通过邮箱联系。
   </p>
 </BaseLayout>
 

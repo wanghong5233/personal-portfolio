@@ -1,7 +1,7 @@
 ---
 title: ScholarMind
-summary: 面向论文阅读与研究工作的 AI Agent 学术助手，支持 RAG 召回、引用追溯与多文档对话。
-role: 独立开发 / 全栈开发 / 架构设计
+summary: 面向学术研究的 AI 助手，重点处理 RAG 检索、引用溯源和长文档编辑。
+role: 独立开发者 / Agent 算法工程师（端到端交付）
 status: demo
 featured: true
 tags:
@@ -17,8 +17,7 @@ stack:
   - LLM
 evidence:
   demo: https://scholarmind.wh5233.me/demo
-  github: https://github.com/your-name/scholarmind
-  architecture: /images/projects/scholarmind-architecture.webp
+  github: https://github.com/wanghong5233/ScholarMind
 cover: /images/projects/scholarmind-cover.webp
 startedAt: 2026-03-01
 updatedAt: 2026-05-05
@@ -26,43 +25,43 @@ updatedAt: 2026-05-05
 
 ## 问题背景
 
-研究者在阅读海量论文时缺少可信的检索与摘要工具，单纯的 ChatGPT 难以追溯引用，也难以在多个文档间维持上下文。ScholarMind 的目标是把"论文检索 + 阅读 + 提问"做成可信的工程化应用。
+ScholarMind 面向学术研究场景，重点处理三个问题：文献检索不稳定、生成内容难以溯源、LaTeX 长文档编辑成本高。系统以本地知识库为基础，集成学术 RAG、DeepResearch 和 Doc Studio。
 
 ## 我的职责
 
-- 端到端独立设计与开发：前端、后端、数据库、模型链路、部署。
-- RAG 召回与引用追溯：chunking、向量检索、reranker、答案中嵌入引用。
-- 多文档 Agent 工作流：跨论文对话、笔记、摘要任务。
+- 负责整体架构和核心功能实现，包括多智能体工作流、学术 RAG 检索链路和文档编辑 Agent。
+- 设计并实现 DeepResearch 的 Planner / Manager / Research / Reporter 多 Agent 协作机制，支持子问题动态扩展、队列去重、证据质量评估与报告生成。
+- 设计 Doc Studio 的 ReAct 编辑闭环，覆盖意图识别、精确改写、编译校验、Diff 展示与回滚。
+- 负责系统工程化落地，包括上下文记忆、工具预算控制、危险操作审批、流式交互与可观测性设计。
 
 ## 技术架构
 
-- 前端：Next.js + TypeScript + Tailwind。
-- 后端：FastAPI + PostgreSQL + pgvector + Redis 队列。
-- 模型链路：商业 LLM API + 第三方 reranker + 自维护 chunk 策略。
-- 部署：Vercel 前端 + 阿里云 ECS 后端 + Cloudflare Tunnel。
+- DeepResearch：Planner / Manager / Research / Reporter 多智能体协作，结合 Observe-Decide-Act 闭环与 Beam-Select 并发动作策略。
+- Doc Studio：ReAct 编辑 Agent，支持定位、读片段、精确改写、编译 / 校验、差异呈现与审批回滚。
+- 学术 RAG：PDF 双引擎解析、BM25 + 向量多路召回、Multi-Query / HyDE 查询增强、RRF + MMR 融合、Cross-Encoder 精排。
+- 部署：Vercel 前端 + 阿里云 ECS 后端 + Cloudflare Tunnel，面向面试演示做低成本稳定部署。
 
 ## 核心难点
 
-- 引用追溯：在不牺牲答案质量的前提下，保证回答的每条主张都能映射回原文段落。
-- 召回评估：构造可重复的离线评估集，量化 chunking 与 reranker 改动的影响。
-- 低成本上线：在 2C2G 主机上稳定承载演示流量。
+- 引用溯源：生成结果需要回填页码 / BBox 级证据锚点，降低学术写作中的幻觉和错误引用风险。
+- 多路召回质量：通过 Multi-Query / HyDE、RRF、MMR 与 Cross-Encoder 精排平衡覆盖率、相关性和冗余控制。
+- Agent 治理：Doc Studio 需要在长文档协作中处理工具预算、连续失败自恢复、危险操作审批与历史回滚。
 
 ## Demo 与证据
 
-- 在线 Demo：占位（替换为真实 URL）
-- 演示视频：占位
-- 架构图：占位
-- 关键 PR / 技术文章：占位
+- 在线 Demo：https://scholarmind.wh5233.me/demo
+- GitHub：https://github.com/wanghong5233/ScholarMind
+- 架构图：待补充到 `public/images/projects/scholarmind-architecture.webp`
+- 视频 / 复盘文章：待补充
 
 ## 结果与复盘
 
-- 已实现：占位（替换为可量化的指标，如召回 / 准确 / 延迟）
-- 已知限制：占位
-- 后续改进：占位
+- DeepResearch 支持本地知识库与学术网络（arXiv / Semantic Scholar）的双源检索，并能输出带引用的研究报告。
+- Doc Studio 支持 LaTeX 长文档的语义定位、精确改写、编译校验、行级 Diff 对比和审批回滚。
+- 后续重点是补充更系统的召回评估、长文档编辑稳定性评估和公开技术复盘。
 
-## 面试可追问点
+## 设计取舍与后续计划
 
-- chunking 策略的权衡与实验结果。
-- 如何评估 reranker 带来的实际收益。
-- Agent 工作流中失败模式与重试策略的设计。
-- 成本控制：在 2C2G 主机上承载 LLM 调用的链路设计。
+- 检索链路采用混合召回 + 精排，而不是纯向量检索，以保证学术长尾问题的覆盖率。
+- Doc Studio 强调 Human-in-the-loop 和审批令牌，而不是让 Agent 自动执行所有编辑，优先控制风险。
+- 低成本部署阶段优先使用外部模型 API 与轻量后端，避免在 2C2G ECS 上运行重型 parser 或本地模型。

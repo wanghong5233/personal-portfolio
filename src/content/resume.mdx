@@ -5,50 +5,64 @@ updatedAt: 2026-05-05
 
 ## 个人信息
 
-- 姓名：WH（占位）
-- 求职方向：AI 应用 / 全栈 / Agent 工程
+- 姓名：王鸿
+- 求职方向：大模型应用 / Agent 工程
 - 在线主页：https://wh5233.me
-- 邮箱：your-email@example.com
-- GitHub：https://github.com/your-name
+- 邮箱：wh_5233@163.com
+- GitHub：https://github.com/wanghong5233
 
 ## 教育背景
 
-- **学校 / 专业 / 学历 / 起止时间**（占位）
-- 主修课程：占位
-- 研究方向：占位
+- **苏州大学（211） / 人工智能 / 硕士**，2024.09 – 2027.06
+- **武汉科技大学 / 软件工程 / 本科**，2019.09 – 2024.06
+- 研究方向：边缘智能、多智能体强化学习、大模型应用与 Agent 系统工程
 
-## 实习经历
+## 核心技术栈
 
-### 公司名称 — 岗位名称（占位）
-
-- 时间：YYYY.MM – YYYY.MM
-- 主要负责：占位
-- 关键产出：占位
+- **编程语言与工程**：Python、FastAPI、asyncio、PostgreSQL、Milvus、Docker、Linux、WebSocket / SSE
+- **Agent / LLM 系统**：Agent Runtime、Multi-Agent、ReAct、Tool Calling、Prompt Engineering、MCP、长期记忆、Checkpoint / Resume
+- **RAG / 检索增强**：Hybrid Search（BM25 + Vector）、Cross-Encoder、RRF、MMR、Multi-Query、HyDE、引用溯源
+- **大模型后训练与评估**：HuggingFace Transformers、LLaMA-Factory、QLoRA、SFT、DPO、LLM-as-a-Judge、Qwen2.5
+- **AI 辅助开发**：使用 Cursor、Claude Code 辅助方案设计、代码生成、重构与复杂 Debug
 
 ## 项目经历
 
-### ScholarMind — AI 学术助手
+### Pulse — 通用个人智能体平台
 
-- 角色：独立开发 / 架构设计
-- 技术：Next.js、FastAPI、PostgreSQL、pgvector、LLM
-- 关键工作：RAG 召回、引用追溯、Agent 工作流
+- 时间：2026.03 – 至今
+- 角色：独立开发者 / Agent 全栈工程师
+- 技术：Python、FastAPI、asyncio、PostgreSQL、Agent Runtime、ReAct、MCP、Patchright、WebSocket / SSE
+- 描述：个人 Agent Runtime 实验项目，底层分为 Agent OS、Task Runtime、Memory Runtime，支持长期任务调度、恢复和多渠道交互。
+- 关键工作：实现 Heartbeat、任务抽象、模块自注册、安全门控、Checkpoint / Resume、长期记忆；在此基础上落地求职自动化与技术雷达。
+- 结果：系统在个人真实求职中持续运行；求职模块覆盖 BOSS 直聘、猎聘、智联招聘、实习僧等平台，单平台日均自动触达 50+ 位 HR。
+- 详情：[/projects/pulse](/projects/pulse)
+
+### ScholarMind — 面向学术研究的 AI 助手平台
+
+- 时间：2025.07 – 至今
+- 角色：独立开发者 / Agent 算法工程师
+- 技术：FastAPI、PostgreSQL、RAG、Multi-Agent、ReAct、Hybrid Search、Cross-Encoder
+- 描述：面向学术研究的 AI 辅助平台，重点处理文献调研、引用可信和 LaTeX 长文档编辑。
+- 关键工作：构建学术 RAG 与引用溯源能力；实现 DeepResearch 多智能体研究工作流和 Doc Studio 编辑 Agent。
+- 结果：DeepResearch 支持本地知识库与学术网络双源检索联合推理，Doc Studio 支持 LaTeX 长文档语义定位、精确改写、编译校验、Diff 对比与审批回滚。
 - 详情：[/projects/scholarmind](/projects/scholarmind)
 
-### ScriptLens — 剧本解析与评估工具
+### Resona — MBTI 个性化社交助手
 
-- 角色：独立开发
-- 技术：占位
-- 关键工作：占位
-- 详情：[/projects/scriptlens](/projects/scriptlens)
+- 时间：2025.12 – 至今
+- 角色：独立开发者 / 大模型算法工程师
+- 技术：Qwen2.5、QLoRA、SFT、DPO、LLM-as-a-Judge、数据清洗与合成
+- 描述：面向社交回复场景的个性化模型实验，目标是减少模板化和说教感，保持人格一致性。
+- 关键工作：采集真实社区高赞回复，构建 MBTI 风格化 SFT 数据；使用 DPO 做偏好对齐，并用 LLM-as-a-Judge 评估。
+- 结果：DPO 后有效抑制多轮交互中的人格漂移；人设一致性胜率达到 82%，在 1000 组真实高压冲突测试集上平均得分达到 8.9 / 10。
+- 详情：[/projects/resona](/projects/resona)
 
-## 技术栈
+## 科研经历
 
-- **前端**：TypeScript、React、Next.js、Astro、Tailwind CSS
-- **后端**：Python、FastAPI、Node.js
-- **AI 应用**：RAG、Agent、Embedding、Reranker、向量数据库
-- **数据**：PostgreSQL、pgvector、Redis
-- **工程化**：Docker、CI、Vercel、Cloudflare
+- **Safe Multi-Agent Deep Reinforcement Learning for Privacy-Aware Edge-Device Collaborative DNN Inference**，IEEE Transactions on Vehicular Technology，Early Access，2026，DOI: 10.1109/TVT.2026.3670497（中科院二区 Top / IF 7.1）
+- **Privacy-Aware Joint DNN Model Deployment and Partitioning Optimization for Collaborative Edge Inference Services**，IEEE Transactions on Services Computing，2025（CCF-A / IF 5.8）
 
-## 奖项与其他
+## 证书与其他
 
-- 占位：竞赛 / 开源 / 论文 / 公开技术分享。
+- 软件设计师（中级），2021.11
+- CET-6，526 分，具备英文文献检索与技术资料阅读能力
