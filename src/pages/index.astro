@@ -20,7 +20,7 @@ const featured = allProjects
   description={`${site.headline}。${site.status}`}
 >
   <section class="surface-panel mb-14 rounded-[2rem] p-6 md:p-10">
-    <div class="grid gap-8 md:grid-cols-[1.7fr_1fr] md:items-end">
+    <div class="grid gap-8 md:grid-cols-[1.7fr_1fr] md:items-stretch">
       <div>
         <p class="eyebrow mb-3">
           {site.title}
@@ -70,15 +70,15 @@ const featured = allProjects
         }
       </div>
 
-      <div class="grid gap-5 md:self-stretch">
-        <div class="build-loop-note justify-self-start md:justify-self-end">
+      <div class="flex flex-col gap-5 md:h-full md:min-h-0">
+        <div class="build-loop-note w-full shrink-0">
           <p class="build-loop-copy">
             <span>先跑起来</span>
             <span>再变可靠</span>
           </p>
         </div>
 
-        <aside class="quiet-card rounded-3xl p-5 md:self-end">
+        <aside class="quiet-card mt-auto w-full rounded-3xl p-5">
           <p class="text-sm font-semibold mb-4" style="color: var(--color-fg);">
             给访问者的 30 秒速读
           </p>

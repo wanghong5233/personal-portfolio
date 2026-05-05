@@ -111,22 +111,22 @@ a:hover {
   }
 
   .build-loop-note {
-    color: #d878a5;
+    color: #c23b6e;
     font-family:
-      "Nunito", "Avenir Next Rounded", "Arial Rounded MT Bold",
-      var(--font-sans);
-    max-width: 21rem;
-    padding-top: 0.6rem;
+      "ZCOOL KuaiLe", "Hiragino Maru Gothic ProN", "Yu Gothic UI", "Microsoft YaHei UI",
+      "Nunito", "Avenir Next Rounded", var(--font-sans);
+    width: 100%;
+    padding-top: 0;
     text-align: left;
   }
 
   .build-loop-copy {
     display: grid;
-    gap: 0.18rem;
-    font-size: clamp(2.25rem, 4.5vw, 3.65rem);
-    font-weight: 900;
-    letter-spacing: -0.08em;
-    line-height: 0.98;
+    gap: 0.55rem;
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    line-height: 1.12;
   }
 
   .tag {
