@@ -100,6 +100,7 @@ a:hover {
     font-size: 0.875rem;
     font-weight: 650;
     letter-spacing: 0.02em;
+    line-height: 1.35;
   }
 
   .hero-headline {
@@ -126,6 +127,16 @@ a:hover {
     width: 100%;
     padding-top: 0;
     text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .hero-side-stack {
+      padding-top: calc(0.875rem * 1.35 + 0.75rem);
+    }
+
+    .hero-side-stack .build-loop-note {
+      transform: translateY(-0.12rem);
+    }
   }
 
   .build-loop-copy {

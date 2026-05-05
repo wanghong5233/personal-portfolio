@@ -70,7 +70,9 @@ const featured = allProjects
         }
       </div>
 
-      <div class="hero-side-stack flex w-full flex-col gap-2 md:min-h-0 md:self-end">
+      <div
+        class="hero-side-stack flex h-full w-full min-h-0 flex-col gap-2"
+      >
         <div class="build-loop-note w-full shrink-0">
           <p class="build-loop-copy">
             <span>先跑起来</span>
@@ -78,7 +80,9 @@ const featured = allProjects
           </p>
         </div>
 
-        <aside class="quiet-card w-full rounded-3xl px-5 pb-5 pt-4">
+        <div class="max-md:hidden min-h-0 flex-1 basis-0" aria-hidden="true"></div>
+
+        <aside class="quiet-card w-full shrink-0 rounded-3xl px-5 pb-5 pt-4">
           <p class="text-sm font-semibold mb-3" style="color: var(--color-fg);">
             给访问者的 30 秒速读
           </p>
