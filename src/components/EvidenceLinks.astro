@@ -1,0 +1,36 @@
+---
+interface Props {
+  evidence: {
+    demo?: string;
+    github?: string;
+    video?: string;
+    architecture?: string;
+    article?: string;
+  };
+  compact?: boolean;
+}
+
+const { evidence, compact = false } = Astro.props;
+
+const items = [
+  { key: 'demo', label: 'Demo', href: evidence.demo, external: true },
+  { key: 'github', label: 'GitHub', href: evidence.github, external: true },
+  { key: 'video', label: '视频', href: evidence.video, external: false },
+  { key: 'architecture', label: '架构图', href: evidence.architecture, external: false },
+  { key: 'article', label: '复盘文章', href: evidence.article, external: true },
+].filter((i) => Boolean(i.href));
+---
+
+{
+  items.length > 0 && (
+    <ul class={`flex flex-wrap gap-x-3 gap-y-1 list-none p-0 ${compact ? 'text-xs' : 'text-sm'}`}>
+      {items.map((i) => (
+        <li>
+          <a href={i.href} target={i.external ? '_blank' : undefined} rel={i.external ? 'noopener' : undefined}>
+            {i.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}

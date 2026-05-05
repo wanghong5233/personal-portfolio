@@ -1,0 +1,102 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import site from '../data/site.json';
+
+const homeEntry = await getEntry('home', 'home');
+if (!homeEntry) throw new Error('Missing src/content/home.mdx');
+const { Content: HomeContent } = await render(homeEntry);
+
+const allProjects = await getCollection('projects');
+const featured = allProjects
+  .filter((p) => p.data.featured)
+  .sort((a, b) => +b.data.updatedAt - +a.data.updatedAt)
+  .slice(0, 3);
+---
+
+<BaseLayout
+  title=""
+  description={`${site.headline}。${site.status}`}
+>
+  <section class="mb-12">
+    <p class="text-sm mb-2" style="color: var(--color-muted);">
+      {site.title}
+    </p>
+    <h1 class="text-3xl md:text-4xl font-bold leading-tight mb-3">
+      {homeEntry.data.headline}
+    </h1>
+    <p class="text-base md:text-lg mb-4" style="color: var(--color-muted);">
+      {homeEntry.data.intro}
+    </p>
+    <p
+      class="inline-block text-sm rounded-md px-3 py-1.5 mb-5"
+      style="border: 1px solid var(--color-border); background: var(--color-card);"
+    >
+      {site.status}
+    </p>
+    <div class="flex flex-wrap gap-3 mb-5">
+      <a
+        href="/resume"
+        class="no-underline rounded-md px-4 py-2 text-sm font-medium"
+        style="background: var(--color-accent); color: var(--color-accent-fg);"
+      >
+        查看在线简历
+      </a>
+      <a
+        href="/projects"
+        class="no-underline rounded-md px-4 py-2 text-sm font-medium"
+        style="border: 1px solid var(--color-border); color: var(--color-fg);"
+      >
+        查看作品集
+      </a>
+      <a
+        href="/contact"
+        class="no-underline rounded-md px-4 py-2 text-sm font-medium"
+        style="border: 1px solid var(--color-border); color: var(--color-fg);"
+      >
+        联系我
+      </a>
+    </div>
+    {
+      homeEntry.data.techTags.length > 0 && (
+        <ul class="flex flex-wrap gap-1.5 list-none p-0">
+          {homeEntry.data.techTags.map((t) => (
+            <li
+              class="text-xs px-2 py-0.5 rounded"
+              style="border: 1px solid var(--color-border); color: var(--color-muted);"
+            >
+              {t}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+
+  <section class="mb-12 prose prose-neutral dark:prose-invert max-w-none">
+    <HomeContent />
+  </section>
+
+  <section class="mb-4">
+    <div class="flex items-baseline justify-between mb-4">
+      <h2 class="text-xl font-semibold">代表项目</h2>
+      <a href="/projects" class="text-sm">全部 →</a>
+    </div>
+    <div class="grid gap-4">
+      {
+        featured.map((p) => (
+          <ProjectCard
+            href={`/projects/${p.id}`}
+            title={p.data.title}
+            summary={p.data.summary}
+            role={p.data.role}
+            status={p.data.status}
+            tags={p.data.tags}
+            evidence={p.data.evidence}
+          />
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

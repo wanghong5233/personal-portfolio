@@ -1,0 +1,55 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import site from '../data/site.json';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  noindex?: boolean;
+  bodyClass?: string;
+}
+
+const {
+  title,
+  description = site.headline,
+  ogImage = '/og.png',
+  noindex = false,
+  bodyClass = '',
+} = Astro.props;
+
+const fullTitle = title ? `${title} · ${site.name}` : `${site.name} · ${site.title}`;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? site.domain).toString();
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site ?? site.domain).toString()} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title={site.name} href="/rss.xml" />
+  </head>
+  <body class={`min-h-dvh flex flex-col ${bodyClass}`.trim()}>
+    <Nav />
+    <main class="flex-1 mx-auto w-full max-w-3xl px-5 py-10 md:py-14">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

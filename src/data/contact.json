@@ -1,0 +1,10 @@
+{
+  "email": "your-email@example.com",
+  "github": "https://github.com/your-name",
+  "feishu": "https://example.feishu.cn",
+  "blog": "https://example.feishu.cn/wiki",
+  "wechatQr": "/images/contact/wechat-qr.webp",
+  "preferredContact": "邮箱 / 飞书 / 微信",
+  "availability": "2027 届校招，正在寻找 AI 应用 / 全栈 / Agent 工程方向岗位",
+  "emailSubjectSuggestion": "AI 应用工程岗位沟通"
+}

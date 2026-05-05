@@ -1,0 +1,80 @@
+---
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import site from '../data/site.json';
+import contact from '../data/contact.json';
+
+const entry = await getEntry('resume', 'resume');
+if (!entry) throw new Error('Missing src/content/resume.mdx');
+const { Content } = await render(entry);
+
+const updatedLabel = entry.data.updatedAt.toISOString().slice(0, 10);
+---
+
+<BaseLayout title="在线简历" description={`${site.name} 的最新在线简历。最后更新：${updatedLabel}。`}>
+  <article class="resume-page prose prose-neutral dark:prose-invert max-w-none">
+    <header class="not-prose mb-6 pb-4 border-b" style="border-color: var(--color-border);">
+      <h1 class="text-3xl font-bold mb-1">{site.fullName} · {site.title}</h1>
+      <p class="text-sm" style="color: var(--color-muted);">{site.headline}</p>
+      <p class="text-sm mt-2">
+        <a href={site.domain}>{site.domain.replace(/^https?:\/\//, '')}</a>
+        <span class="mx-2" style="color: var(--color-subtle);">·</span>
+        <a href={`mailto:${contact.email}`}>{contact.email}</a>
+        <span class="mx-2" style="color: var(--color-subtle);">·</span>
+        <a href={contact.github} target="_blank" rel="noopener">GitHub</a>
+      </p>
+      <div class="no-print flex flex-wrap gap-2 mt-4 text-sm">
+        <button
+          type="button"
+          id="copy-resume-link"
+          class="rounded px-3 py-1.5"
+          style="border: 1px solid var(--color-border); background: var(--color-card); color: var(--color-fg);"
+        >
+          复制链接
+        </button>
+        <button
+          type="button"
+          onclick="window.print()"
+          class="rounded px-3 py-1.5"
+          style="border: 1px solid var(--color-border); background: var(--color-card); color: var(--color-fg);"
+        >
+          打印为 PDF
+        </button>
+        <a
+          href="/files/resume.pdf"
+          class="no-underline rounded px-3 py-1.5"
+          style="border: 1px solid var(--color-border); background: var(--color-card); color: var(--color-fg);"
+          download
+        >
+          下载 PDF（如已生成）
+        </a>
+      </div>
+    </header>
+
+    <Content />
+
+    <footer class="not-prose mt-10 pt-4 border-t text-sm" style="border-color: var(--color-border); color: var(--color-muted);">
+      <p>最后更新：{updatedLabel}</p>
+      <p>
+        在线简历是最新版本的真相源。已投递的 PDF 简历上的二维码 / 短链统一指向
+        <a href="/resume">{site.domain}/resume</a>。
+      </p>
+    </footer>
+  </article>
+</BaseLayout>
+
+<script is:inline>
+  document.addEventListener('click', (e) => {
+    const target = e.target;
+    if (target instanceof HTMLElement && target.id === 'copy-resume-link') {
+      const url = window.location.href.split('#')[0];
+      navigator.clipboard.writeText(url).then(() => {
+        const original = target.textContent;
+        target.textContent = '已复制';
+        setTimeout(() => {
+          target.textContent = original;
+        }, 1500);
+      });
+    }
+  });
+</script>

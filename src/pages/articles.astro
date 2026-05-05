@@ -1,0 +1,81 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const all = await getCollection('articles');
+const articles = all
+  .filter((a) => a.data.status !== 'draft')
+  .sort((a, b) => +b.data.publishedAt - +a.data.publishedAt);
+
+const allTags = Array.from(new Set(articles.flatMap((a) => a.data.tags))).sort();
+---
+
+<BaseLayout title="技术文章" description="技术文章索引，正文托管在外部平台（飞书 / 博客）。">
+  <header class="mb-6">
+    <h1 class="text-3xl font-bold mb-2">技术文章</h1>
+    <p class="text-sm" style="color: var(--color-muted);">
+      正文托管在外部平台。本页只维护标题、摘要、标签与发布时间。
+    </p>
+  </header>
+
+  {
+    allTags.length > 0 && (
+      <ul class="flex flex-wrap gap-1.5 list-none p-0 mb-6">
+        {allTags.map((t) => (
+          <li
+            class="text-xs px-2 py-0.5 rounded"
+            style="border: 1px solid var(--color-border); color: var(--color-muted);"
+          >
+            {t}
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  {
+    articles.length === 0 ? (
+      <p style="color: var(--color-muted);">暂无公开文章。新增方式：编辑 <code>src/content/articles/articles.json</code>。</p>
+    ) : (
+      <ul class="grid gap-4 list-none p-0">
+        {articles.map((a) => {
+          const isBroken = a.data.status === 'broken';
+          const dateLabel = a.data.publishedAt.toISOString().slice(0, 10);
+          return (
+            <li
+              class="rounded-lg border p-4"
+              style={`border-color: var(--color-border); background: var(--color-card); ${isBroken ? 'opacity: 0.6;' : ''}`}
+            >
+              <div class="flex items-baseline justify-between gap-3 mb-1">
+                <a
+                  href={isBroken ? undefined : a.data.url}
+                  target={isBroken ? undefined : '_blank'}
+                  rel={isBroken ? undefined : 'noopener'}
+                  class="font-semibold no-underline"
+                  style="color: var(--color-fg);"
+                >
+                  {a.data.title}
+                  {isBroken && <span class="text-xs ml-2" style="color: var(--color-muted);">[失效]</span>}
+                </a>
+                <span class="text-xs shrink-0" style="color: var(--color-muted);">{dateLabel}</span>
+              </div>
+              <p class="text-sm mb-2" style="color: var(--color-muted);">{a.data.summary}</p>
+              {a.data.tags.length > 0 && (
+                <ul class="flex flex-wrap gap-1.5 list-none p-0">
+                  {a.data.tags.map((t) => (
+                    <li
+                      class="text-xs px-2 py-0.5 rounded"
+                      style="border: 1px solid var(--color-border); color: var(--color-muted);"
+                    >
+                      {t}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    )
+  }
+</BaseLayout>

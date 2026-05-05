@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="页面未找到" description="请求的页面不存在。" noindex>
+  <section class="text-center py-16">
+    <p class="text-sm mb-2" style="color: var(--color-muted);">404</p>
+    <h1 class="text-2xl font-bold mb-3">页面未找到</h1>
+    <p class="text-sm mb-6" style="color: var(--color-muted);">
+      你要找的内容可能已经被移除或链接发生了变化。
+    </p>
+    <p class="flex flex-wrap justify-center gap-3 text-sm">
+      <a href="/">回到首页</a>
+      <a href="/projects">作品集</a>
+      <a href="/resume">在线简历</a>
+      <a href="/contact">联系我</a>
+    </p>
+  </section>
+</BaseLayout>

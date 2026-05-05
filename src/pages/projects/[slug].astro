@@ -1,0 +1,76 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import EvidenceLinks from '../../components/EvidenceLinks.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((p) => ({
+    params: { slug: p.id },
+    props: { entry: p },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const updatedLabel = entry.data.updatedAt.toISOString().slice(0, 10);
+
+const statusLabel: Record<string, string> = {
+  live: '已上线',
+  demo: 'Demo 可用',
+  wip: '开发中',
+  archived: '归档',
+};
+---
+
+<BaseLayout title={entry.data.title} description={entry.data.summary}>
+  <article class="prose prose-neutral dark:prose-invert max-w-none">
+    <header class="not-prose mb-6">
+      <p class="text-sm mb-1" style="color: var(--color-muted);">
+        {entry.data.role}
+      </p>
+      <h1 class="text-3xl font-bold mb-2">{entry.data.title}</h1>
+      <p class="text-base mb-3" style="color: var(--color-muted);">
+        {entry.data.summary}
+      </p>
+      <div class="flex flex-wrap items-center gap-2 text-xs mb-4" style="color: var(--color-muted);">
+        <span
+          class="rounded-full px-2 py-0.5"
+          style="border: 1px solid var(--color-border);"
+        >
+          {statusLabel[entry.data.status] ?? entry.data.status}
+        </span>
+        <span>更新：{updatedLabel}</span>
+      </div>
+      {
+        entry.data.tags.length > 0 && (
+          <ul class="flex flex-wrap gap-1.5 list-none p-0 mb-3">
+            {entry.data.tags.map((t) => (
+              <li
+                class="text-xs px-2 py-0.5 rounded"
+                style="border: 1px solid var(--color-border); color: var(--color-muted);"
+              >
+                {t}
+              </li>
+            ))}
+          </ul>
+        )
+      }
+      {
+        entry.data.stack.length > 0 && (
+          <p class="text-sm" style="color: var(--color-muted);">
+            技术栈：{entry.data.stack.join(' · ')}
+          </p>
+        )
+      }
+      <div class="mt-3">
+        <EvidenceLinks evidence={entry.data.evidence} />
+      </div>
+    </header>
+    <Content />
+  </article>
+
+  <p class="mt-10 text-sm">
+    <a href="/projects">← 返回作品集</a>
+  </p>
+</BaseLayout>

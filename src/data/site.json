@@ -1,0 +1,19 @@
+{
+  "name": "WH",
+  "fullName": "Your Name",
+  "title": "2027 届研究生 / AI 应用与全栈工程方向",
+  "headline": "关注 RAG、Agent、知识库与全栈工程化的开发者",
+  "status": "正在寻找 AI 应用 / 全栈 / Agent 工程方向岗位",
+  "location": "China",
+  "domain": "https://wh5233.me",
+  "resumePath": "/resume",
+  "updatedAt": "2026-05-05",
+  "nav": [
+    { "label": "首页", "href": "/" },
+    { "label": "作品集", "href": "/projects" },
+    { "label": "文章", "href": "/articles" },
+    { "label": "关于", "href": "/about" },
+    { "label": "在线简历", "href": "/resume" },
+    { "label": "联系", "href": "/contact" }
+  ]
+}

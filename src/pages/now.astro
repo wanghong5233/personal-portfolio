@@ -1,0 +1,19 @@
+---
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const entry = await getEntry('now', 'now');
+if (!entry) throw new Error('Missing src/content/now.mdx');
+const { Content } = await render(entry);
+
+const updated = entry.data.updatedAt;
+const updatedLabel = updated.toISOString().slice(0, 10);
+---
+
+<BaseLayout title="当前状态" description="当前阶段、求职/研究方向、近期重点。">
+  <article class="prose prose-neutral dark:prose-invert max-w-none">
+    <h1>{entry.data.title}</h1>
+    <p style="color: var(--color-muted); font-size: 0.9rem;">最后更新：{updatedLabel}</p>
+    <Content />
+  </article>
+</BaseLayout>

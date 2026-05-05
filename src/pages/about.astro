@@ -1,0 +1,15 @@
+---
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const entry = await getEntry('about', 'about');
+if (!entry) throw new Error('Missing src/content/about.mdx');
+const { Content } = await render(entry);
+---
+
+<BaseLayout title="关于" description={entry.data.summary}>
+  <article class="prose prose-neutral dark:prose-invert max-w-none">
+    <h1>{entry.data.title}</h1>
+    <Content />
+  </article>
+</BaseLayout>

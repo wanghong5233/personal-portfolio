@@ -1,0 +1,12 @@
+[
+  {
+    "id": "rag-engineering-notes-1",
+    "title": "示例文章标题：RAG 工程化笔记（一）",
+    "summary": "关于 chunking、reranker 与召回评估的工程化经验。这是占位条目，发布前请替换为真实文章。",
+    "tags": ["RAG", "工程化"],
+    "publishedAt": "2026-04-01",
+    "url": "https://example.feishu.cn",
+    "status": "draft",
+    "featured": false
+  }
+]

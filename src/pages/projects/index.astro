@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+const projects = (await getCollection('projects'))
+  .filter((p) => p.data.status !== 'archived')
+  .sort((a, b) => +b.data.updatedAt - +a.data.updatedAt);
+
+const allTags = Array.from(
+  new Set(projects.flatMap((p) => p.data.tags))
+).sort();
+---
+
+<BaseLayout title="作品集" description="项目卡片、标签、状态与详情入口。">
+  <header class="mb-6">
+    <h1 class="text-3xl font-bold mb-2">作品集</h1>
+    <p class="text-sm" style="color: var(--color-muted);">
+      共 {projects.length} 个项目。代表项目优先展示。
+    </p>
+  </header>
+
+  {
+    allTags.length > 0 && (
+      <ul class="flex flex-wrap gap-1.5 list-none p-0 mb-6">
+        {allTags.map((t) => (
+          <li
+            class="text-xs px-2 py-0.5 rounded"
+            style="border: 1px solid var(--color-border); color: var(--color-muted);"
+          >
+            {t}
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  <section class="grid gap-4">
+    {
+      projects.map((p) => (
+        <ProjectCard
+          href={`/projects/${p.id}`}
+          title={p.data.title}
+          summary={p.data.summary}
+          role={p.data.role}
+          status={p.data.status}
+          tags={p.data.tags}
+          evidence={p.data.evidence}
+        />
+      ))
+    }
+  </section>
+</BaseLayout>

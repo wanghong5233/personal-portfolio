@@ -1,0 +1,35 @@
+---
+import site from '../data/site.json';
+
+const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+
+<header
+  class="no-print sticky top-0 z-30 backdrop-blur border-b"
+  style="background: color-mix(in oklab, var(--color-bg) 92%, transparent); border-color: var(--color-border);"
+>
+  <div class="mx-auto max-w-3xl px-5 py-3 flex items-center gap-4">
+    <a href="/" class="font-semibold no-underline" style="color: var(--color-fg);">
+      {site.name}
+    </a>
+    <nav class="ml-auto flex flex-wrap gap-x-4 gap-y-1 text-sm">
+      {
+        site.nav.map((item) => {
+          const isActive =
+            item.href === '/'
+              ? pathname === '/'
+              : pathname === item.href || pathname.startsWith(item.href + '/');
+          return (
+            <a
+              href={item.href}
+              class="no-underline transition-opacity"
+              style={`color: ${isActive ? 'var(--color-fg)' : 'var(--color-muted)'}; ${isActive ? 'font-weight: 600;' : ''}`}
+            >
+              {item.label}
+            </a>
+          );
+        })
+      }
+    </nav>
+  </div>
+</header>
