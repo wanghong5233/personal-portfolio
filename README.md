@@ -15,12 +15,10 @@
 
 环境要求：
 
-- Node.js **≥ 20.18**（推荐 22）。Node 18 会装上但 Astro 5 / Tailwind v4 不能正常运行。
+- Node.js **≥ 20.18**（推荐 22；仓库 `.nvmrc` 为 `22`）。**在当前终端**执行 `node -v` 确认，避免 IDE / Conda 环境与系统 Node 不一致。
 - npm ≥ 10.x。
 
-仓库根目录的 `.nvmrc` 是 Node 版本约定文件，内容 `22` 表示本项目推荐使用 Node 22。它需要放在根目录，方便 nvm、CI 和部分部署平台自动识别。
-
-如果你的系统里 `node -v` 是 18，请先升级（推荐用 [nvm-windows](https://github.com/coreybutler/nvm-windows) 或 [Volta](https://volta.sh/)），否则 `npm install` 会因 `optionalDependencies` 跳过原生 binding 导致 `@tailwindcss/oxide` 启动失败。
+升级可参考 [nvm-windows](https://github.com/coreybutler/nvm-windows) 或 [Volta](https://volta.sh/)。
 
 ```bash
 npm install
@@ -28,8 +26,6 @@ npm run dev
 ```
 
 默认访问 `http://localhost:4321/`。
-
-若出现 `The requested module 'node:util' does not provide an export named 'styleText'`，说明当前 Shell 里用的 **Node 版本过低**（常见于 Conda `base` 自带的旧 Node）。请在**项目目录**执行 `node -v`，需 **≥ 20.18**（与 `package.json` 中 `engines` 一致）；升级到 20.18+ 或 22 后再执行 `npm run dev`。
 
 常用脚本：
 
