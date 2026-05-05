@@ -1,8 +1,8 @@
 [
   {
-    "id": "feishu-article-index-draft",
-    "title": "飞书文章索引整理中",
-    "summary": "后续整理公开技术文章后接入飞书文档链接。",
+    "id": "article-index-placeholder",
+    "title": "文章索引占位",
+    "summary": "正式条目发布后此草稿不会出现在列表中。",
     "tags": ["待整理"],
     "publishedAt": "2026-05-05",
     "url": "https://wh5233.me/articles",

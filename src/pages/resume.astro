@@ -1,8 +1,16 @@
 ---
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import { getEntry, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import site from '../data/site.json';
 import contact from '../data/contact.json';
+
+const RESUME_ATTACHMENT = 'resume.pdf';
+const resumeAttachmentHref = `/files/${RESUME_ATTACHMENT}`;
+const hasResumeAttachment = existsSync(
+  join(process.cwd(), 'public', 'files', RESUME_ATTACHMENT),
+);
 
 const entry = await getEntry('resume', 'resume');
 if (!entry) throw new Error('Missing src/content/resume.mdx');
@@ -40,14 +48,26 @@ const updatedLabel = entry.data.updatedAt.toISOString().slice(0, 10);
         >
           打印为 PDF
         </button>
-        <a
-          href="/files/resume.pdf"
-          class="no-underline rounded px-3 py-1.5"
-          style="border: 1px solid var(--color-border); background: var(--color-card); color: var(--color-fg);"
-          download
-        >
-          下载 PDF（如已生成）
-        </a>
+        {
+          hasResumeAttachment ? (
+            <a
+              href={resumeAttachmentHref}
+              class="no-underline rounded px-3 py-1.5"
+              style="border: 1px solid var(--color-border); background: var(--color-card); color: var(--color-fg);"
+              download
+            >
+              下载附件简历
+            </a>
+          ) : (
+            <span
+              class="rounded px-3 py-1.5 inline-flex items-center"
+              style="border: 1px dashed var(--color-border); color: var(--color-muted); cursor: default;"
+              title="将 PDF 置于 public/files/resume.pdf 并重新部署后即可下载"
+            >
+              附件简历暂未上传
+            </span>
+          )
+        }
       </div>
     </header>
 

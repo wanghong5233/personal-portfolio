@@ -10,12 +10,9 @@ const articles = all
 const allTags = Array.from(new Set(articles.flatMap((a) => a.data.tags))).sort();
 ---
 
-<BaseLayout title="技术文章" description="技术文章索引，后续接入飞书文档链接。">
+<BaseLayout title="技术文章" description="技术文章索引：标题、摘要、标签与外链。">
   <header class="mb-6">
     <h1 class="text-3xl font-bold mb-2">技术文章</h1>
-    <p class="text-sm" style="color: var(--color-muted);">
-      这里会整理技术文章索引。正文优先放在飞书文档，本页只保留标题、摘要、标签和链接。
-    </p>
   </header>
 
   {
@@ -35,7 +32,7 @@ const allTags = Array.from(new Set(articles.flatMap((a) => a.data.tags))).sort()
 
   {
     articles.length === 0 ? (
-      <p style="color: var(--color-muted);">文章索引整理中。后续会接入飞书文档链接。</p>
+      <p style="color: var(--color-muted);">暂无已发布的文章。公开后会在此列出标题、摘要与链接。</p>
     ) : (
       <ul class="grid gap-4 list-none p-0">
         {articles.map((a) => {
