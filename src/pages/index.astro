@@ -12,7 +12,7 @@ const allProjects = await getCollection('projects');
 const featured = allProjects
   .filter((p) => p.data.featured)
   .sort((a, b) => +b.data.updatedAt - +a.data.updatedAt)
-  .slice(0, 4);
+  .slice(0, 3);
 ---
 
 <BaseLayout
