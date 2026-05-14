@@ -1,4 +1,6 @@
 ---
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import EvidenceLinks from '../../components/EvidenceLinks.astro';
@@ -21,6 +23,17 @@ const statusLabel: Record<string, string> = {
   wip: '持续迭代',
   archived: '归档',
 };
+
+const videoHref = entry.data.evidence.video?.trim();
+const isExternalVideo = Boolean(videoHref && /^https?:\/\//.test(videoHref));
+const localVideoPublicPath =
+  videoHref && videoHref.startsWith('/') ? join(process.cwd(), 'public', videoHref.slice(1)) : undefined;
+const hasLocalVideo = Boolean(localVideoPublicPath && existsSync(localVideoPublicPath));
+const canPlayVideo = Boolean(videoHref) && (isExternalVideo || hasLocalVideo);
+const missingVideoHint =
+  videoHref && videoHref.startsWith('/')
+    ? `请将视频文件放到 public${videoHref}，或改成可访问的外链 URL。`
+    : '请确认视频 URL 可访问。';
 ---
 
 <BaseLayout title={entry.data.title} description={entry.data.summary}>
@@ -67,6 +80,35 @@ const statusLabel: Record<string, string> = {
         <EvidenceLinks evidence={entry.data.evidence} />
       </div>
     </header>
+
+    {
+      videoHref && (
+        <section
+          class="not-prose mb-6 rounded-2xl border p-4"
+          style="border-color: var(--color-border); background: var(--color-card);"
+        >
+          <h2 class="text-base font-semibold mb-3" style="color: var(--color-fg);">演示视频</h2>
+          {
+            canPlayVideo ? (
+              <video
+                class="w-full rounded-lg"
+                style="border: 1px solid var(--color-border); background: #000;"
+                controls
+                preload="metadata"
+                playsinline
+              >
+                <source src={videoHref} type="video/mp4" />
+                当前浏览器不支持 HTML5 视频播放。请直接打开
+                <a href={videoHref} style="margin-left: 0.25rem;">视频链接</a>。
+              </video>
+            ) : (
+              <p class="text-sm" style="color: var(--color-muted);">{missingVideoHint}</p>
+            )
+          }
+        </section>
+      )
+    }
+
     <Content />
   </article>
 

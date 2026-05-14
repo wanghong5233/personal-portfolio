@@ -12,11 +12,13 @@ interface Props {
 
 const { evidence, compact = false } = Astro.props;
 
+const isExternalUrl = (href?: string) => Boolean(href && /^https?:\/\//.test(href));
+
 const items = [
   { key: 'demo', label: '访问入口', href: evidence.demo, external: true },
   { key: 'github', label: 'GitHub', href: evidence.github, external: true },
-  { key: 'video', label: '视频', href: evidence.video, external: false },
-  { key: 'architecture', label: '架构图', href: evidence.architecture, external: false },
+  { key: 'video', label: '视频', href: evidence.video, external: isExternalUrl(evidence.video) },
+  { key: 'architecture', label: '架构图', href: evidence.architecture, external: isExternalUrl(evidence.architecture) },
   { key: 'article', label: '复盘文章', href: evidence.article, external: true },
 ].filter((i) => Boolean(i.href));
 ---
