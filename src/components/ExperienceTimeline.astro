@@ -1,0 +1,46 @@
+---
+import experience from '../data/experience.json';
+
+interface Props {
+  variant?: 'compact' | 'detailed';
+}
+
+const { variant = 'compact' } = Astro.props;
+---
+
+<ol class:list={['exp-timeline', variant === 'detailed' && 'exp-timeline--detailed']}>
+  {
+    experience.map((job) => (
+      <li class="exp-item">
+        <div class="exp-rail" aria-hidden="true">
+          <span class="exp-dot" />
+        </div>
+        <div class="exp-body">
+          <time class="exp-dates">
+            {job.start} – {job.end}
+          </time>
+          <h3 class="exp-title">
+            <span class="exp-company">{job.company}</span>
+            <span class="exp-sep">—</span>
+            <span class="exp-role">{job.role}</span>
+          </h3>
+          <p class="exp-summary">{job.summary}</p>
+          {variant === 'detailed' && job.tech.length > 0 && (
+            <ul class="exp-tech">
+              {job.tech.map((t) => (
+                <li class="tag">{t}</li>
+              ))}
+            </ul>
+          )}
+          {variant === 'detailed' && job.highlights.length > 0 && (
+            <ul class="exp-highlights">
+              {job.highlights.map((h) => (
+                <li>{h}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </li>
+    ))
+  }
+</ol>

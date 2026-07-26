@@ -2,6 +2,7 @@
 import { getCollection, getEntry, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import ExperienceTimeline from '../components/ExperienceTimeline.astro';
 import site from '../data/site.json';
 
 const homeEntry = await getEntry('home', 'home');
@@ -28,11 +29,8 @@ const featured = allProjects
         <h1 class="hero-headline text-4xl md:text-6xl font-bold leading-[1.05] mb-5 tracking-tight">
           {homeEntry.data.headline}
         </h1>
-        <p class="text-base md:text-lg mb-5 max-w-2xl leading-8" style="color: var(--color-muted);">
+        <p class="text-base md:text-lg mb-7 max-w-2xl leading-8" style="color: var(--color-muted);">
           {homeEntry.data.intro}
-        </p>
-        <p class="status-pill mb-7">
-          {site.status}
         </p>
         <div class="flex flex-wrap gap-3 mb-6">
           <a
@@ -96,8 +94,8 @@ const featured = allProjects
               <dd class="font-medium" style="color: var(--color-fg);">大模型应用 / Agent 工程</dd>
             </div>
             <div>
-              <dt class="mb-1" style="color: var(--color-subtle);">证据入口</dt>
-              <dd class="font-medium" style="color: var(--color-fg);">访问入口、GitHub、架构图与复盘</dd>
+              <dt class="mb-1" style="color: var(--color-subtle);">近期工作</dt>
+              <dd class="font-medium" style="color: var(--color-fg);">启湾智驰 · AI 全栈工程师（实习）</dd>
             </div>
           </dl>
         </aside>
@@ -107,6 +105,11 @@ const featured = allProjects
 
   <section class="mb-12 prose prose-neutral max-w-none">
     <HomeContent />
+  </section>
+
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold tracking-tight mb-5">工作经历</h2>
+    <ExperienceTimeline variant="compact" />
   </section>
 
   <section class="mb-4">

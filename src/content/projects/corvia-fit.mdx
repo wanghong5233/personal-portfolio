@@ -1,0 +1,58 @@
+---
+title: Corvia Fit
+summary: Shopify 服饰合身顾问：确认尺码表确定性选码，结合买家评论证据解释依据，并支持一键加购与推荐回流校准。
+role: 独立开发者 / AI 全栈工程师（端到端交付）
+status: wip
+featured: true
+tags:
+  - AI Full-Stack
+  - Evidence Grounding
+  - Evaluation Loop
+  - Production App
+stack:
+  - TypeScript
+  - React Router
+  - Prisma
+  - PostgreSQL
+  - Shopify
+  - LLM
+evidence:
+  video: /videos/corvia-fit-demo-v0.mp4
+startedAt: 2026-07-01
+updatedAt: 2026-07-26
+---
+
+## 问题背景
+
+Corvia Fit 面向服饰电商尺码选择与退货风险，在商品页 Size 选择器旁提供 Fit Finder：根据商家确认的尺码表推荐尺码，结合真实买家评论解释合身依据，并支持一键加购。
+
+## 我的职责
+
+- 独立完成产品定义、选码引擎、评论信号管线、商家后台、店面组件与生产部署。
+- 将早期商品页聊天形态收敛为找码面板，减少输入步骤并突出推荐结果与证据。
+- 完成 Shopify App Proxy、Theme Extension、Billing、GDPR Webhook、数据导出与上架材料。
+
+## 技术架构
+
+- 确定性 FitDecision 负责选码，LLM 负责自然语言理解、评论信号抽取与解释文案。
+- 评论管线从买家评论抽取合身信号，并支持按 SKU 校准推荐。
+- 店面经 App Proxy + Theme App Extension 嵌入商品页；商家后台管理尺码表、校准与计费。
+- Prisma + PostgreSQL 持久化配置与信号；覆盖 Billing 与 GDPR 合规路径。
+
+## 核心难点
+
+- 边界清晰：选码必须由尺码表确定性完成，LLM 不直接决定尺码，只解释与补全上下文。
+- 证据可用：推荐需展示可读的买家评论原文，避免“有信号但店面看不见”的空壳演示。
+- 上架完整：除主路径外，还需覆盖 Billing、GDPR、权限与 Listing 材料，才能进入审核。
+
+## 结果与复盘
+
+- 主路径：商品页 Fit Finder → 推荐尺码 + 买家评论原文依据 → 正确变体一键加购。
+- 准度飞轮可演示：推荐 / 加购结果回流，合身评论校准 SKU，使难选码商品越用越准。
+- 生产与上架：Billing、GDPR、数据导出与 Listing 材料齐套；Shopify App Store Listing 审核中。
+
+## 设计取舍与后续计划
+
+- 选码与解释解耦：确定性引擎保证可复现，LLM 只做解释层。
+- 先做通用合身能力，获客与演示聚焦难选码品类，而不是做成单一品类专用 App。
+- 公开上架前按可日常使用标准验收，优先保证主路径价值可见。

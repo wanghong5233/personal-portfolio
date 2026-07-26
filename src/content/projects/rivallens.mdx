@@ -1,0 +1,62 @@
+---
+title: RivalLens
+summary: 字节跳动 AI 全栈项目挑战作品，多 Agent 完成竞品调研、证据归集、报告生成与质量审查，60 支队伍中入围 30 强答辩。
+role: 队长 / Agent 全栈工程师（3 人团队）
+status: demo
+featured: true
+tags:
+  - Multi-Agent
+  - Workflow Orchestration
+  - Evidence Grounding
+  - AI Full-Stack
+  - LangGraph
+stack:
+  - Python
+  - FastAPI
+  - LangGraph
+  - React
+  - PostgreSQL
+  - Docker
+evidence:
+  demo: https://rival-lens.vercel.app
+  github: https://github.com/wanghong5233/RivalLens
+  video: /videos/rivallens-demo-v0.mp4
+startedAt: 2026-05-20
+updatedAt: 2026-06-23
+---
+
+## 问题背景
+
+RivalLens 面向产品经理、市场分析与创业团队，将一句自然语言需求转成多 Agent 调研任务，自动完成竞品发现、公开资料采集、跨竞品分析与带引用报告生成。
+
+## 我的职责
+
+- 担任队长，主导系统架构、核心代码、部署、文档与答辩交付。
+- 负责 LangGraph 多 Agent 编排、Agent 间 Schema、检索与证据链设计。
+- 负责 Run API / SSE 实时进度、Trace DAG 与端到端部署。
+- 协调 3 人团队完成完整 Demo，并入围 30 强答辩。
+
+## 技术架构
+
+- 编排：Intake / Planner / Supervisor / Researcher / Analyst / Writer / QA 多 Agent 闭环。
+- 协议：Agent 间以结构化 Schema 传递产品画像、功能、定价、人群与结论矩阵。
+- 证据：多源检索与全文兜底，报告结论绑定引用来源，可在 Evidence Console 回看。
+- 工程：FastAPI + PostgreSQL 持久化 Run / Trace；React 前端 + SSE Live 页；Docker 部署。
+
+## 核心难点
+
+- 编排可控：用 Supervisor 运行时调度替代固定流水线，同时保留 HITL 暂停点与打回上限。
+- 证据约束：结论必须绑定可核验来源；QA 以规则校验 + 语义审查双层拦截无证据 claim。
+- 过程可观测：每步 Agent 输入输出、工具调用与 token 消耗需可回放，支撑答辩与排错。
+
+## 结果与复盘
+
+- 交付物：自然语言需求 → 澄清 / 计划确认 → Live 执行 → 带引用报告与证据回看（公开 Demo）。
+- 字节跳动 AI 全栈项目挑战中，从约 60 支队伍入围 30 强答辩。
+- 报告可沉淀竞品画像，支撑后续持续追踪。
+
+## 设计取舍与后续计划
+
+- 采用强 Schema 通信，而不是自然语言接力，降低 Agent 间信息漂移。
+- QA 打回按角色精准回流，而不是整轮重跑，控制成本与时延。
+- 优先保证证据链与可观测性，再扩展持续追踪能力。

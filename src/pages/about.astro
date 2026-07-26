@@ -1,6 +1,7 @@
 ---
 import { getEntry, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import aboutData from '../data/about.json';
 
 const entry = await getEntry('about', 'about');
 if (!entry) throw new Error('Missing src/content/about.mdx');
@@ -8,8 +9,76 @@ const { Content } = await render(entry);
 ---
 
 <BaseLayout title="关于" description={entry.data.summary}>
-  <article class="prose prose-neutral max-w-none">
-    <h1>{entry.data.title}</h1>
-    <Content />
+  <article class="about-page">
+    <header class="about-hero">
+      <p class="eyebrow mb-4">关于</p>
+      <h1 class="about-statement">{aboutData.statement}</h1>
+      <p class="about-lead">{aboutData.lead}</p>
+    </header>
+
+    <section class="about-block prose prose-neutral max-w-none">
+      <Content />
+    </section>
+
+    <section class="about-block" aria-labelledby="about-focus">
+      <h2 id="about-focus" class="about-label">我在做什么</h2>
+      <ul class="about-items">
+        {
+          aboutData.focus.map((item, index) => (
+            <li class="about-item">
+              <span class="about-item-index" aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <div>
+                <h3 class="about-item-title">{item.title}</h3>
+                <p class="about-item-body">{item.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="about-block" aria-labelledby="about-principles">
+      <h2 id="about-principles" class="about-label">我怎么做事</h2>
+      <ul class="about-items">
+        {
+          aboutData.principles.map((item) => (
+            <li class="about-item about-item--plain">
+              <span class="about-item-mark" aria-hidden="true">—</span>
+              <div>
+                <h3 class="about-item-title">{item.title}</h3>
+                <p class="about-item-body">{item.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="about-block" aria-labelledby="about-timeline">
+      <h2 id="about-timeline" class="about-label">怎么走到这里</h2>
+      <ol class="about-timeline">
+        {
+          aboutData.timeline.map((item) => (
+            <li class="about-timeline-row">
+              <span class="about-timeline-year">{item.year}</span>
+              <p class="about-timeline-body">{item.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section class="about-block" aria-labelledby="about-personal">
+      <h2 id="about-personal" class="about-label">一点私人的</h2>
+      <ul class="about-personal">
+        {aboutData.personal.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+
+    <nav class="about-links" aria-label="继续了解">
+      {aboutData.links.map((link) => <a href={link.href}>{link.label}</a>)}
+    </nav>
   </article>
 </BaseLayout>

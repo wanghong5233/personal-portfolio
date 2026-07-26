@@ -1,7 +1,9 @@
 ---
 title: 在线简历
-updatedAt: 2026-05-05
+updatedAt: 2026-07-26
 ---
+
+import ExperienceTimeline from '../components/ExperienceTimeline.astro';
 
 ## 个人信息
 
@@ -19,17 +21,41 @@ updatedAt: 2026-05-05
 
 ## 核心技术栈
 
-- **编程语言与工程**：Python、FastAPI、asyncio、PostgreSQL、pgvector、Docker、Linux、WebSocket / SSE
-- **Agent / LLM 系统**：Agent Runtime、Multi-Agent、ReAct、Tool Calling、Prompt Engineering、MCP、长期记忆、Checkpoint / Resume
-- **RAG / 检索增强**：Hybrid Search（BM25 + Vector）、Cross-Encoder、RRF、MMR、Multi-Query、HyDE、引用溯源
-- **大模型后训练与评估**：HuggingFace Transformers、LLaMA-Factory、QLoRA、SFT、DPO、LLM-as-a-Judge、Qwen2.5
-- **AI 辅助开发**：使用 Cursor、Claude Code 辅助方案设计、代码生成、重构与复杂 Debug
+- **工程交付**：Python、asyncio、FastAPI、PostgreSQL、Redis、Docker、WebSocket / SSE
+- **Agent 系统**：LangGraph、Multi-Agent、ReAct、Tool Calling、MCP、Prompt Engineering、Agent Runtime
+- **RAG / 检索**：RAG、Hybrid Search、Embedding、Rerank、pgvector
+
+## 工作经历
+
+<div class="not-prose my-4">
+  <ExperienceTimeline variant="detailed" />
+</div>
 
 ## 项目经历
 
-### Pulse — 通用个人智能体平台
+### Corvia Fit — Shopify 服饰合身顾问
 
-- 时间：2026.03 – 至今
+- 时间：2026.07 – 至今
+- 角色：独立开发者 / AI 全栈工程师
+- 技术：TypeScript、React Router、Prisma、PostgreSQL、Shopify Theme Extension、LLM API
+- 描述：在商品页提供 Fit Finder，根据确认尺码表确定性选码，并结合真实买家评论解释合身依据，支持一键加购。
+- 关键工作：完成选码引擎、评论信号管线、SKU 校准飞轮、商家后台、店面组件、Billing、GDPR 与生产部署。
+- 结果：完整演示路径覆盖确定性选码、评论证据与回流校准；Shopify App Store Listing 审核中。
+- 详情：[/projects/corvia-fit](/projects/corvia-fit)
+
+### RivalLens — 多 Agent 竞品分析平台
+
+- 时间：2026.05 – 2026.06
+- 角色：队长 / Agent 全栈工程师（3 人团队）
+- 技术：Python、FastAPI、LangGraph、React、PostgreSQL、Docker、SSE
+- 描述：字节跳动 AI 全栈项目挑战作品，将自然语言需求转成竞品发现、证据采集、分析、写作与质量审查任务。
+- 关键工作：主导多 Agent 编排、结构化协议、检索与证据链、Run API / SSE、Trace DAG 和端到端部署。
+- 结果：公开 Demo 可走通调研全链路与证据回看；从约 60 支队伍中入围 30 强答辩。
+- 详情：[/projects/rivallens](/projects/rivallens)
+
+### Pulse — 通用个人智能助手
+
+- 时间：2026.03 – 2026.05
 - 角色：独立开发者 / Agent 全栈工程师
 - 技术：Python、FastAPI、asyncio、PostgreSQL、Agent Runtime、ReAct、MCP、Patchright、WebSocket / SSE
 - 描述：个人 Agent Runtime 实验项目，底层分为 Agent OS、Task Runtime、Memory Runtime，支持长期任务调度、恢复和多渠道交互。
@@ -39,7 +65,7 @@ updatedAt: 2026-05-05
 
 ### ScholarMind — 面向学术研究的 AI 助手平台
 
-- 时间：2025.07 – 至今
+- 时间：2025.07 – 2026.03
 - 角色：独立开发者 / Agent 算法工程师
 - 技术：FastAPI、PostgreSQL、RAG、Multi-Agent、ReAct、Hybrid Search、Cross-Encoder
 - 描述：面向学术研究的 AI 辅助平台，重点处理文献调研、引用可信和 LaTeX 长文档编辑。
@@ -47,20 +73,11 @@ updatedAt: 2026-05-05
 - 结果：DeepResearch 支持本地知识库与学术网络双源检索联合推理，Doc Studio 支持 LaTeX 长文档语义定位、精确改写、编译校验、Diff 对比与审批回滚。
 - 详情：[/projects/scholarmind](/projects/scholarmind)
 
-### Resona — MBTI 个性化社交助手
-
-- 时间：2025.12 – 至今
-- 角色：独立开发者 / 大模型算法工程师
-- 技术：Qwen2.5、QLoRA、SFT、DPO、LLM-as-a-Judge、数据清洗与合成
-- 描述：面向社交回复场景的个性化模型实验，目标是减少模板化和说教感，保持人格一致性。
-- 关键工作：采集真实社区高赞回复，构建 MBTI 风格化 SFT 数据；使用 DPO 做偏好对齐，并用 LLM-as-a-Judge 评估。
-- 结果：DPO 后有效抑制多轮交互中的人格漂移；人设一致性胜率达到 82%，在 1000 组真实高压冲突测试集上平均得分达到 8.9 / 10。
-- 详情：[/projects/resona](/projects/resona)
-
 ## 科研经历
 
 - **Safe Multi-Agent Deep Reinforcement Learning for Privacy-Aware Edge-Device Collaborative DNN Inference**，IEEE Transactions on Vehicular Technology，Early Access，2026，DOI: 10.1109/TVT.2026.3670497（中科院二区 Top / IF 7.1）
 - **Privacy-Aware Joint DNN Model Deployment and Partitioning Optimization for Collaborative Edge Inference Services**，IEEE Transactions on Services Computing，2025（CCF-A / IF 5.8）
+- **Graph-Enhanced Deep Reinforcement Learning for Share-Aware Multi-Task DNN Inference in Low-Altitude Intelligent Service Networks**，IEEE Transactions on Services Computing，Under Review，2026（CCF-A / IF 5.8）
 
 ## 证书与其他
 

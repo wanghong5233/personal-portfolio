@@ -3,7 +3,7 @@ title: Resona
 summary: 个性化社交回复模型实验，使用真实社区语料、SFT 和 DPO 控制人格一致性。
 role: 独立开发者 / 大模型算法工程师（SFT + DPO）
 status: wip
-featured: true
+featured: false
 tags:
   - SFT
   - DPO
@@ -47,11 +47,6 @@ updatedAt: 2026-05-05
 - 真实高质量数据稀缺：纯 AI 合成数据容易模板化，需要从真实高赞回复中抽取人类社交直觉。
 - 人格边界控制：模型容易在多轮对话中发生人格漂移，需要 DPO 惩罚偏离人设的回复。
 - 偏好对构造：不能让模型把“外向回复更长”误学成“更好”，因此 chosen / rejected 必须在同一 MBTI 条件下构造。
-
-## 证据入口
-
-- GitHub：https://github.com/wanghong5233/Resona
-- 训练报告 / 评估样例 / 模型卡：待补充
 
 ## 结果与复盘
 
