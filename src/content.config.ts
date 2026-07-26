@@ -29,12 +29,16 @@ const projects = defineCollection({
   }),
 });
 
+const articleGroup = z.enum(['playbook', 'pitfalls', 'notes']);
+
 const articles = defineCollection({
   loader: file('src/content/articles/articles.json'),
   schema: z.object({
     id: z.string(),
     title: z.string(),
     summary: z.string(),
+    group: articleGroup,
+    order: z.number().int().optional(),
     tags: z.array(z.string()).default([]),
     publishedAt: z.coerce.date(),
     url: z.string().url(),
