@@ -29,7 +29,7 @@ const grouped = sections.map((section) => ({
 }));
 ---
 
-<BaseLayout title="技术文章" description="工程实践与踩坑复盘，正文托管于飞书公开文档。">
+<BaseLayout title="技术文章" description="工程实践与踩坑复盘。">
   <header class="mb-6">
     <h1 class="text-3xl font-bold mb-2">技术文章</h1>
   </header>
@@ -51,6 +51,7 @@ const grouped = sections.map((section) => ({
                 {section.items.map((a) => {
                   const isBroken = a.data.status === 'broken';
                   const dateLabel = a.data.publishedAt.toISOString().slice(0, 10);
+                  const href = isBroken ? undefined : `/articles/${a.id}`;
                   return (
                     <li
                       class="rounded-lg border p-4"
@@ -58,9 +59,7 @@ const grouped = sections.map((section) => ({
                     >
                       <div class="flex items-baseline justify-between gap-3 mb-1">
                         <a
-                          href={isBroken ? undefined : a.data.url}
-                          target={isBroken ? undefined : '_blank'}
-                          rel={isBroken ? undefined : 'noopener'}
+                          href={href}
                           class="font-semibold no-underline"
                           style="color: var(--color-fg);"
                         >

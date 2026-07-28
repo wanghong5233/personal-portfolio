@@ -46,10 +46,7 @@ html {
 
 body {
   min-height: 100dvh;
-  background:
-    radial-gradient(circle at top left, rgba(37, 87, 214, 0.11), transparent 32rem),
-    radial-gradient(circle at top right, rgba(203, 161, 92, 0.12), transparent 24rem),
-    linear-gradient(180deg, #fffdf8 0, var(--color-bg) 22rem);
+  background: var(--color-bg);
 }
 
 a {
@@ -627,5 +624,27 @@ a:hover {
   padding: 0 1rem 1rem;
   margin: 0;
 }
+
+.article-page {
+  max-width: 46rem;
+  margin-inline: auto;
+}
+
+.article-body :is(pre.mermaid, .mermaid, img[src^="data:image/svg"]) {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  margin: 1.75rem auto;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  background: var(--color-surface);
+}
+
+.article-body img {
+  height: auto;
+}
+
 
 

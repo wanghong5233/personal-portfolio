@@ -1,5 +1,5 @@
 import { defineCollection, z } from 'astro:content';
-import { glob, file } from 'astro/loaders';
+import { glob } from 'astro/loaders';
 
 const projectStatus = z.enum(['live', 'demo', 'wip', 'archived']);
 const contentStatus = z.enum(['featured', 'active', 'draft', 'archived', 'broken']);
@@ -32,16 +32,14 @@ const projects = defineCollection({
 const articleGroup = z.enum(['playbook', 'pitfalls', 'notes']);
 
 const articles = defineCollection({
-  loader: file('src/content/articles/articles.json'),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: 'src/content/articles' }),
   schema: z.object({
-    id: z.string(),
     title: z.string(),
     summary: z.string(),
     group: articleGroup,
     order: z.number().int().optional(),
     tags: z.array(z.string()).default([]),
     publishedAt: z.coerce.date(),
-    url: z.string().url(),
     status: contentStatus.default('active'),
     featured: z.boolean().default(false),
   }),
