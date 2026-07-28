@@ -12,6 +12,7 @@
     { "label": "首页", "href": "/" },
     { "label": "作品集", "href": "/projects" },
     { "label": "文章", "href": "/articles" },
+    { "label": "知识库", "href": "https://notes.wh5233.me" },
     { "label": "关于", "href": "/about" },
     { "label": "在线简历", "href": "/resume" },
     { "label": "联系", "href": "/contact" }
