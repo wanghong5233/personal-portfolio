@@ -62,14 +62,6 @@ const about = defineCollection({
   }),
 });
 
-const now = defineCollection({
-  loader: glob({ pattern: 'now.{md,mdx}', base: 'src/content' }),
-  schema: z.object({
-    title: z.string(),
-    updatedAt: z.coerce.date(),
-  }),
-});
-
 const resume = defineCollection({
   loader: glob({ pattern: 'resume.{md,mdx}', base: 'src/content' }),
   schema: z.object({
@@ -83,6 +75,5 @@ export const collections = {
   articles,
   home,
   about,
-  now,
   resume,
 };

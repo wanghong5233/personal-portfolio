@@ -6,41 +6,115 @@ interface Props {
 }
 
 const { variant = 'compact' } = Astro.props;
+
+function splitHighlight(text: string): { label: string | null; body: string } {
+  const match = text.match(/^([^：:]{1,24})[：:](.*)$/s);
+  if (!match) return { label: null, body: text };
+  return {
+    label: match[1].trim(),
+    body: match[2].trim(),
+  };
+}
 ---
 
 <ol class:list={['exp-timeline', variant === 'detailed' && 'exp-timeline--detailed']}>
   {
-    experience.map((job) => (
-      <li class="exp-item">
-        <div class="exp-rail" aria-hidden="true">
-          <span class="exp-dot" />
-        </div>
-        <div class="exp-body">
-          <time class="exp-dates">
-            {job.start} – {job.end}
-          </time>
-          <h3 class="exp-title">
-            <span class="exp-company">{job.company}</span>
-            <span class="exp-sep">—</span>
-            <span class="exp-role">{job.role}</span>
-          </h3>
-          <p class="exp-summary">{job.summary}</p>
-          {variant === 'detailed' && job.tech.length > 0 && (
-            <ul class="exp-tech">
-              {job.tech.map((t) => (
-                <li class="tag">{t}</li>
-              ))}
-            </ul>
-          )}
-          {variant === 'detailed' && job.highlights.length > 0 && (
-            <ul class="exp-highlights">
-              {job.highlights.map((h) => (
-                <li>{h}</li>
-              ))}
-            </ul>
-          )}
-        </div>
-      </li>
-    ))
+    experience.map((job) => {
+      const hasExpandable =
+        variant === 'detailed' && (job.highlights.length > 0 || Boolean(job.result));
+
+      return (
+        <li class="exp-item">
+          <div class="exp-rail" aria-hidden="true">
+            <span class="exp-dot" />
+          </div>
+          <div class="exp-body">
+            <time class="exp-dates">
+              {job.start} – {job.end}
+            </time>
+            <h3 class="exp-title">
+              <span class="exp-company">{job.company}</span>
+              <span class="exp-sep">—</span>
+              <span class="exp-role">{job.role}</span>
+            </h3>
+            <p class="exp-summary">{job.summary}</p>
+
+            {variant === 'detailed' && job.tech.length > 0 && (
+              <ul class="exp-tech no-print">
+                {job.tech.map((t) => (
+                  <li class="tag">{t}</li>
+                ))}
+              </ul>
+            )}
+
+            {hasExpandable && (
+              <div class="exp-collapsible is-collapsed" data-exp-collapsible>
+                <button
+                  type="button"
+                  class="exp-toggle no-print"
+                  data-exp-toggle
+                  aria-expanded="false"
+                >
+                  <span data-exp-toggle-label>展开详情</span>
+                  <span class="exp-toggle-icon" aria-hidden="true">↓</span>
+                </button>
+
+                <div class="exp-details" data-exp-details>
+                  {job.highlights.length > 0 && (
+                    <ul class="exp-highlights">
+                      {job.highlights.map((h) => {
+                        const { label, body } = splitHighlight(h);
+                        return (
+                          <li>
+                            {label ? (
+                              <>
+                                <strong class="exp-highlight-label">{label}</strong>
+                                <span class="exp-highlight-sep">：</span>
+                                <span class="exp-highlight-body">{body}</span>
+                              </>
+                            ) : (
+                              body
+                            )}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  )}
+                  {job.result && (
+                    <p class="exp-summary exp-result">
+                      <strong>项目成果：</strong>
+                      {job.result}
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        </li>
+      );
+    })
   }
 </ol>
+
+<script>
+  function bindExperienceToggles(root: ParentNode = document): void {
+    root.querySelectorAll<HTMLElement>('[data-exp-collapsible]').forEach((wrap) => {
+      const button = wrap.querySelector<HTMLButtonElement>('[data-exp-toggle]');
+      const label = wrap.querySelector<HTMLElement>('[data-exp-toggle-label]');
+      const icon = wrap.querySelector<HTMLElement>('.exp-toggle-icon');
+      if (!button || !label || button.dataset.bound === '1') return;
+
+      button.dataset.bound = '1';
+      button.addEventListener('click', () => {
+        const collapsed = wrap.classList.toggle('is-collapsed');
+        const expanded = !collapsed;
+        button.setAttribute('aria-expanded', String(expanded));
+        label.textContent = expanded ? '收起详情' : '展开详情';
+        if (icon) icon.textContent = expanded ? '↑' : '↓';
+      });
+    });
+  }
+
+  bindExperienceToggles();
+  document.addEventListener('astro:page-load', () => bindExperienceToggles());
+</script>

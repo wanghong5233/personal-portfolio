@@ -1,4 +1,22 @@
 ---
+/**
+ * 【逻辑删除】关于页 — 不对外路由、不进导航
+ *
+ * 原因：
+ * - 版式 / 区块结构（hero → 正文 → 怎么做事 → 时间线 → 私人）已定，保留实现
+ * - 文案未定稿，对外展示会减分，因此从「在用」改为「归档」
+ *
+ * 当前状态：
+ * - 本文件在 `src/archived/`，不参与 Astro 页面路由（原路径 `src/pages/about.astro`）
+ * - `site.json` 的 `nav` 已去掉「关于」；恢复项见同文件 `navArchived`
+ * - 数据仍在：`src/data/about.json`、`src/content/about.mdx`；样式仍在 `global.css`（`.about-*`）
+ *
+ * 恢复上线：
+ * 1. 把本文件移回 `src/pages/about.astro`
+ * 2. 删掉本注释块中「逻辑删除」说明（或改成「已上线」）
+ * 3. 将 `site.json` 的 `navArchived` 里「关于」一项移回 `nav`
+ * 4. 定稿后再发：改 `about.json` / `about.mdx`，不要带着半成品文案上线
+ */
 import { getEntry, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import aboutData from '../data/about.json';
@@ -13,42 +31,23 @@ const { Content } = await render(entry);
     <header class="about-hero">
       <p class="eyebrow mb-4">关于</p>
       <h1 class="about-statement">{aboutData.statement}</h1>
-      <p class="about-lead">{aboutData.lead}</p>
+      {aboutData.lead && <p class="about-lead">{aboutData.lead}</p>}
     </header>
 
     <section class="about-block prose prose-neutral max-w-none">
       <Content />
     </section>
 
-    <section class="about-block" aria-labelledby="about-focus">
-      <h2 id="about-focus" class="about-label">我在做什么</h2>
-      <ul class="about-items">
-        {
-          aboutData.focus.map((item, index) => (
-            <li class="about-item">
-              <span class="about-item-index" aria-hidden="true">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-              <div>
-                <h3 class="about-item-title">{item.title}</h3>
-                <p class="about-item-body">{item.body}</p>
-              </div>
-            </li>
-          ))
-        }
-      </ul>
-    </section>
-
     <section class="about-block" aria-labelledby="about-principles">
-      <h2 id="about-principles" class="about-label">我怎么做事</h2>
+      <h2 id="about-principles" class="about-label">怎么做事</h2>
       <ul class="about-items">
         {
           aboutData.principles.map((item) => (
-            <li class="about-item about-item--plain">
+            <li class="about-item">
               <span class="about-item-mark" aria-hidden="true">—</span>
               <div>
                 <h3 class="about-item-title">{item.title}</h3>
-                <p class="about-item-body">{item.body}</p>
+                {item.body && <p class="about-item-body">{item.body}</p>}
               </div>
             </li>
           ))
@@ -76,9 +75,5 @@ const { Content } = await render(entry);
         {aboutData.personal.map((item) => <li>{item}</li>)}
       </ul>
     </section>
-
-    <nav class="about-links" aria-label="继续了解">
-      {aboutData.links.map((link) => <a href={link.href}>{link.label}</a>)}
-    </nav>
   </article>
 </BaseLayout>

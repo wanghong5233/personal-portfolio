@@ -308,14 +308,76 @@ a:hover {
   }
 
   .exp-highlights {
+    list-style: disc;
     margin: 0.75rem 0 0;
-    padding-left: 1.1rem;
+    padding-left: 1.25rem;
     color: var(--color-muted);
   }
 
   .exp-highlights li {
-    margin: 0.35rem 0;
-    line-height: 1.65;
+    margin: 0.55rem 0;
+    padding-left: 0.15rem;
+    line-height: 1.7;
+  }
+
+  .exp-highlights li::marker {
+    color: var(--color-subtle);
+  }
+
+  .exp-highlight-label {
+    color: var(--color-fg);
+    font-weight: 650;
+  }
+
+  .exp-highlight-sep {
+    color: var(--color-fg);
+  }
+
+  .exp-result {
+    margin-top: 0.85rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .exp-result strong {
+    color: var(--color-fg);
+  }
+
+  .exp-collapsible {
+    margin-top: 0.55rem;
+  }
+
+  .exp-toggle {
+    appearance: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    color: var(--color-accent);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    cursor: pointer;
+  }
+
+  .exp-toggle:hover {
+    text-decoration: underline;
+  }
+
+  .exp-toggle-icon {
+    font-size: 0.75rem;
+    line-height: 1;
+    opacity: 0.8;
+  }
+
+  .exp-collapsible.is-collapsed .exp-details {
+    display: none;
+  }
+
+  .exp-details {
+    margin-top: 0.35rem;
   }
 
   .exp-more {
@@ -382,15 +444,8 @@ a:hover {
 
   .about-item {
     display: grid;
-    grid-template-columns: 2.25rem 1fr;
+    grid-template-columns: 1.25rem 1fr;
     gap: 0.75rem;
-  }
-
-  .about-item-index {
-    font-family: var(--font-mono);
-    font-size: 0.8125rem;
-    color: var(--color-accent);
-    padding-top: 0.3rem;
   }
 
   .about-item-mark {
@@ -463,23 +518,6 @@ a:hover {
     position: absolute;
     left: 0.25rem;
     color: var(--color-accent);
-  }
-
-  .about-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem 1.5rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--color-border);
-  }
-
-  .about-links a {
-    font-size: 0.9375rem;
-    text-decoration: none;
-  }
-
-  .about-links a:hover {
-    text-decoration: underline;
   }
 }
 
@@ -554,6 +592,14 @@ a:hover {
   .exp-summary,
   .exp-highlights {
     color: #000000 !important;
+  }
+
+  .exp-collapsible.is-collapsed .exp-details {
+    display: block !important;
+  }
+
+  .exp-tech {
+    display: none !important;
   }
 }
 

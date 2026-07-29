@@ -2,7 +2,7 @@
   "name": "王鸿",
   "fullName": "王鸿",
   "title": "苏州大学人工智能硕士 / 2027 届",
-  "headline": "聚焦 Agent、Multi-Agent 与大模型应用工程化的开发者",
+  "headline": "聚焦 Agent Runtime、Multi-Agent 工作流与大模型应用真实落地的开发者",
   "status": "正在寻找大模型应用 / Agent 工程方向岗位",
   "location": "苏州",
   "domain": "https://wh5233.me",
@@ -13,8 +13,14 @@
     { "label": "作品集", "href": "/projects" },
     { "label": "文章", "href": "/articles" },
     { "label": "知识库", "href": "https://notes.wh5233.me" },
-    { "label": "关于", "href": "/about" },
     { "label": "在线简历", "href": "/resume" },
     { "label": "联系", "href": "/contact" }
+  ],
+  "navArchived": [
+    {
+      "label": "关于",
+      "href": "/about",
+      "reason": "逻辑删除：版式保留、文案未定稿；实现见 src/archived/about.astro"
+    }
   ]
 }
