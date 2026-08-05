@@ -1,7 +1,7 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-const projectStatus = z.enum(['live', 'demo', 'wip', 'archived']);
+const projectStatus = z.enum(['live', 'listed', 'demo', 'wip', 'archived']);
 const contentStatus = z.enum(['featured', 'active', 'draft', 'archived', 'broken']);
 
 const projects = defineCollection({

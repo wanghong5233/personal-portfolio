@@ -1,7 +1,7 @@
 ---
 import EvidenceLinks from './EvidenceLinks.astro';
 
-type Status = 'live' | 'demo' | 'wip' | 'archived';
+type Status = 'live' | 'listed' | 'demo' | 'wip' | 'archived';
 
 interface Props {
   href: string;
@@ -23,6 +23,7 @@ const { href, title, summary, role, status, tags, evidence = {} } = Astro.props;
 
 const statusLabel: Record<Status, string> = {
   live: '已部署',
+  listed: '已上架',
   demo: 'MVP 开放',
   wip: '持续迭代',
   archived: '归档',
