@@ -2,7 +2,7 @@
 title: Corvia Fit
 summary: Shopify 服饰合身顾问：确认尺码表确定性选码，结合买家评论证据解释依据，并支持一键加购与推荐回流校准。
 role: 独立开发者 / AI 全栈工程师（端到端交付）
-status: wip
+status: live
 featured: true
 tags:
   - AI Full-Stack
@@ -17,9 +17,10 @@ stack:
   - Shopify
   - LLM
 evidence:
+  demo: https://apps.shopify.com/corvia-fit-advisor
   video: /videos/corvia-fit-demo-v0.mp4
 startedAt: 2026-07-01
-updatedAt: 2026-07-26
+updatedAt: 2026-08-05
 ---
 
 ## 问题背景
@@ -43,16 +44,17 @@ Corvia Fit 面向服饰电商尺码选择与退货风险，在商品页 Size 选
 
 - 边界清晰：选码必须由尺码表确定性完成，LLM 不直接决定尺码，只解释与补全上下文。
 - 证据可用：推荐需展示可读的买家评论原文，避免“有信号但店面看不见”的空壳演示。
-- 上架完整：除主路径外，还需覆盖 Billing、GDPR、权限与 Listing 材料，才能进入审核。
+- 上架完整：除主路径外，还需覆盖 Billing、GDPR、权限与 Listing 材料，才能进入审核并正式上架。
 
 ## 结果与复盘
 
 - 主路径：商品页 Fit Finder → 推荐尺码 + 买家评论原文依据 → 正确变体一键加购。
 - 准度飞轮可演示：推荐 / 加购结果回流，合身评论校准 SKU，使难选码商品越用越准。
-- 生产与上架：Billing、GDPR、数据导出与 Listing 材料齐套；Shopify App Store Listing 审核中。
+- 生产与上架：Billing、GDPR、数据导出与 Listing 材料齐套；2026-08-04 正式上架 Shopify App Store（Limited 可见）。
+- 访问入口：[Shopify App Store · Corvia Fit Advisor](https://apps.shopify.com/corvia-fit-advisor)
 
 ## 设计取舍与后续计划
 
 - 选码与解释解耦：确定性引擎保证可复现，LLM 只做解释层。
 - 先做通用合身能力，获客与演示聚焦难选码品类，而不是做成单一品类专用 App。
-- 公开上架前按可日常使用标准验收，优先保证主路径价值可见。
+- 上架后按可日常使用标准持续迭代主路径与校准飞轮；当前 Limited 可见，视反馈推进更广分发。
