@@ -14,3 +14,6 @@ Thumbs.db
 
 # 内部部署笔记，包含 ECS 主机布局与运维约束，不进入公开仓库
 docs/internal/
+
+.vercel
+.env*

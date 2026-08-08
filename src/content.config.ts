@@ -2,7 +2,6 @@ import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
 const projectStatus = z.enum(['live', 'listed', 'demo', 'wip', 'archived']);
-const contentStatus = z.enum(['featured', 'active', 'draft', 'archived', 'broken']);
 
 const projects = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: 'src/content/projects' }),
@@ -26,22 +25,6 @@ const projects = defineCollection({
     cover: z.string().optional(),
     startedAt: z.coerce.date().optional(),
     updatedAt: z.coerce.date(),
-  }),
-});
-
-const articleGroup = z.enum(['playbook', 'pitfalls', 'notes']);
-
-const articles = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: 'src/content/articles' }),
-  schema: z.object({
-    title: z.string(),
-    summary: z.string(),
-    group: articleGroup,
-    order: z.number().int().optional(),
-    tags: z.array(z.string()).default([]),
-    publishedAt: z.coerce.date(),
-    status: contentStatus.default('active'),
-    featured: z.boolean().default(false),
   }),
 });
 
@@ -72,7 +55,6 @@ const resume = defineCollection({
 
 export const collections = {
   projects,
-  articles,
   home,
   about,
   resume,

@@ -19,14 +19,18 @@ const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
     <nav class="ml-auto flex flex-wrap gap-x-4 gap-y-1 text-sm">
       {
         site.nav.map((item) => {
-          const isActive =
+          const isExternal = item.href.startsWith('http');
+          const isActive = !isExternal && (
             item.href === '/'
               ? pathname === '/'
-              : pathname === item.href || pathname.startsWith(item.href + '/');
+              : pathname === item.href || pathname.startsWith(item.href + '/')
+          );
           return (
             <a
               href={item.href}
               class={`nav-link ${isActive ? 'nav-link-active font-semibold' : ''}`}
+              target={isExternal ? '_blank' : undefined}
+              rel={isExternal ? 'noopener' : undefined}
             >
               {item.label}
             </a>

@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import notes from '../data/notes.json';
+---
+
+<BaseLayout title="笔记" description="Agent / 大模型应用工程实践与复盘。">
+  <h1 class="text-3xl font-bold mb-4">笔记</h1>
+  <p>
+    <a href={notes.feishuUrl} target="_blank" rel="noopener">
+      {notes.feishuName}
+    </a>
+  </p>
+</BaseLayout>

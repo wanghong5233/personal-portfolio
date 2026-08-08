@@ -16,13 +16,12 @@ const year = new Date().getFullYear();
     <div class="flex flex-wrap gap-x-4 gap-y-1">
       <a href={`mailto:${contact.email}`}>邮箱</a>
       <a href={contact.github} target="_blank" rel="noopener">GitHub</a>
+      {contact.notes && (
+        <a href={contact.notes}>{contact.notesLabel || '笔记'}</a>
+      )}
       {contact.feishu && (
         <a href={contact.feishu} target="_blank" rel="noopener">飞书</a>
       )}
-      {contact.blog && (
-        <a href={contact.blog} target="_blank" rel="noopener">技术博客</a>
-      )}
-      <a href="https://notes.wh5233.me" target="_blank" rel="noopener">公开笔记</a>
       <a href="/contact">联系方式</a>
       <a href="/resume">在线简历</a>
     </div>

@@ -7,16 +7,25 @@
   "location": "苏州",
   "domain": "https://wh5233.me",
   "resumePath": "/resume",
-  "updatedAt": "2026-07-26",
+  "updatedAt": "2026-08-08",
   "nav": [
     { "label": "首页", "href": "/" },
     { "label": "作品集", "href": "/projects" },
-    { "label": "文章", "href": "/articles" },
-    { "label": "知识库", "href": "https://notes.wh5233.me" },
+    { "label": "笔记", "href": "/notes" },
     { "label": "在线简历", "href": "/resume" },
     { "label": "联系", "href": "/contact" }
   ],
   "navArchived": [
+    {
+      "label": "知识库",
+      "href": "https://notes.wh5233.me",
+      "reason": "已废弃：Quartz 双站归档；现由导航「笔记」外链飞书 Agent/大模型应用工程笔记"
+    },
+    {
+      "label": "文章",
+      "href": "/articles",
+      "reason": "已物理删除：站内文章 demo 已清；对外工程沉淀走飞书「笔记」"
+    },
     {
       "label": "关于",
       "href": "/about",

@@ -41,6 +41,18 @@ import contact from '../data/contact.json';
       <a href={contact.github} target="_blank" rel="noopener" class="font-mono">{contact.github}</a>
     </div>
 
+    {contact.notes && (
+      <div
+        class="rounded-lg border p-4"
+        style="border-color: var(--color-border); background: var(--color-card);"
+      >
+        <p class="text-xs mb-1" style="color: var(--color-muted);">
+          {contact.notesLabel || '笔记'}
+        </p>
+        <a href={contact.notes}>/notes</a>
+      </div>
+    )}
+
     {contact.feishu && (
       <div
         class="rounded-lg border p-4"
@@ -48,16 +60,6 @@ import contact from '../data/contact.json';
       >
         <p class="text-xs mb-1" style="color: var(--color-muted);">飞书主页</p>
         <a href={contact.feishu} target="_blank" rel="noopener" class="font-mono">{contact.feishu}</a>
-      </div>
-    )}
-
-    {contact.blog && (
-      <div
-        class="rounded-lg border p-4"
-        style="border-color: var(--color-border); background: var(--color-card);"
-      >
-        <p class="text-xs mb-1" style="color: var(--color-muted);">技术博客</p>
-        <a href={contact.blog} target="_blank" rel="noopener" class="font-mono">{contact.blog}</a>
       </div>
     )}
 
