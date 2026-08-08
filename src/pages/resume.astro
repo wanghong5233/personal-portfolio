@@ -6,8 +6,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import site from '../data/site.json';
 import contact from '../data/contact.json';
 
-const RESUME_ATTACHMENT = 'resume.pdf';
-const resumeAttachmentHref = `/files/${RESUME_ATTACHMENT}`;
+const RESUME_ATTACHMENT = '王鸿_苏州大学_大模型应用_简历.pdf';
+const resumeAttachmentHref = `/files/${encodeURIComponent(RESUME_ATTACHMENT)}`;
 const hasResumeAttachment = existsSync(
   join(process.cwd(), 'public', 'files', RESUME_ATTACHMENT),
 );
@@ -54,7 +54,7 @@ const updatedLabel = entry.data.updatedAt.toISOString().slice(0, 10);
               href={resumeAttachmentHref}
               class="no-underline rounded px-3 py-1.5"
               style="border: 1px solid var(--color-border); background: var(--color-card); color: var(--color-fg);"
-              download
+              download={RESUME_ATTACHMENT}
             >
               下载附件简历
             </a>
