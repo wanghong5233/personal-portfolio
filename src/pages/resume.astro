@@ -6,11 +6,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import site from '../data/site.json';
 import contact from '../data/contact.json';
 
-const RESUME_ATTACHMENT = '王鸿_苏州大学_大模型应用_简历.pdf';
-const resumeAttachmentHref = `/files/${encodeURIComponent(RESUME_ATTACHMENT)}`;
-const hasResumeAttachment = existsSync(
-  join(process.cwd(), 'public', 'files', RESUME_ATTACHMENT),
-);
+const resumeAttachments = [
+  {
+    fileName: '王鸿_苏州大学_大模型应用_简历.pdf',
+    label: '下载中文简历',
+    language: '中文',
+  },
+  {
+    fileName: 'Hong_Wang_Resume.pdf',
+    label: '下载英文简历',
+    language: '英文',
+  },
+].map((attachment) => ({
+  ...attachment,
+  href: `/files/${encodeURIComponent(attachment.fileName)}`,
+  exists: existsSync(join(process.cwd(), 'public', 'files', attachment.fileName)),
+}));
 
 const entry = await getEntry('resume', 'resume');
 if (!entry) throw new Error('Missing src/content/resume.mdx');
@@ -49,24 +60,26 @@ const updatedLabel = entry.data.updatedAt.toISOString().slice(0, 10);
           打印为 PDF
         </button>
         {
-          hasResumeAttachment ? (
-            <a
-              href={resumeAttachmentHref}
-              class="no-underline rounded px-3 py-1.5"
-              style="border: 1px solid var(--color-border); background: var(--color-card); color: var(--color-fg);"
-              download={RESUME_ATTACHMENT}
-            >
-              下载附件简历
-            </a>
-          ) : (
-            <button
-              type="button"
-              id="download-resume-missing"
-              class="rounded px-3 py-1.5"
-              style="border: 1px solid var(--color-border); background: var(--color-card); color: var(--color-fg);"
-            >
-              下载附件简历
-            </button>
+          resumeAttachments.map((attachment) =>
+            attachment.exists ? (
+              <a
+                href={attachment.href}
+                class="no-underline rounded px-3 py-1.5"
+                style="border: 1px solid var(--color-border); background: var(--color-card); color: var(--color-fg);"
+                download={attachment.fileName}
+              >
+                {attachment.label}
+              </a>
+            ) : (
+              <button
+                type="button"
+                data-missing-resume={attachment.language}
+                class="rounded px-3 py-1.5"
+                style="border: 1px solid var(--color-border); background: var(--color-card); color: var(--color-fg);"
+              >
+                {attachment.label}
+              </button>
+            ),
           )
         }
       </div>
@@ -91,8 +104,8 @@ const updatedLabel = entry.data.updatedAt.toISOString().slice(0, 10);
       });
       return;
     }
-    if (target.id === 'download-resume-missing') {
-      window.alert('附件简历暂未上传。可改用本页「打印为 PDF」导出。');
+    if (target.dataset.missingResume) {
+      window.alert(`${target.dataset.missingResume}简历暂未上传。可改用本页「打印为 PDF」导出。`);
     }
   });
 </script>
